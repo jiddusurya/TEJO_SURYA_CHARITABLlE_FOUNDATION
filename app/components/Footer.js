@@ -22,7 +22,7 @@ export default function Footer() {
                     <div className="md:col-span-2 lg:col-span-1">
                         <Link href="#" className="flex items-center space-x-2 mb-4">
                             <img src="/logo.png" alt="Tejo Surya Foundation Logo" className="h-10 w-10 rounded-full" />
-                            <span className="text-sm font-bold text-white">TEJO SURYA<br />FOUNDATION</span>
+                            <span className="text-sm font-bold text-white"><span className='text-xl font-bold'>TEJO SURYA</span><br /><span className='text-xs font-medium'>Charitable Foundation</span></span>
                         </Link>
                         <p className="text-gray-400 text-sm">Dedicated to promoting menstrual health and hygiene awareness across communities, empowering girls and women to lead a healthier future through education and support.</p>
                         <div className="flex space-x-4 mt-6">
@@ -55,7 +55,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="mt-12 border-t border-gray-700 pt-8 text-center text-sm text-gray-500">
-                    <p>&copy; 2024 Tejo Surya Charitable Foundation. All rights reserved.</p>
+                    <p>&copy; 2025 Tejo Surya Charitable Foundation. All rights reserved.</p>
                     <button className="bg-orange-600 text-white font-bold px-8 py-3 rounded-lg shadow-lg hover:bg-orange-700 transition-colors m-4">
                         Support Our Mission
                     </button>

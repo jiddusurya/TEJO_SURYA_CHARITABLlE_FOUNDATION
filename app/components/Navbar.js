@@ -65,7 +65,7 @@ export default function Navbar() {
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center space-x-2">
               <img src="/logo.png" alt="Tejo Surya Foundation Logo" className="h-10 w-10 rounded-full" />
-              <span className="text-sm font-bold text-gray-800">TEJO SURYA<br />FOUNDATION</span>
+              <span className="text-sm font-bold text-gray-800"><span className='text-xl font-bold'>TEJO SURYA</span><br /><span className='text-xs font-medium'>Charitable Foundation</span></span>
             </Link>
           </div>
 
