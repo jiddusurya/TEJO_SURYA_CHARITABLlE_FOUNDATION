@@ -24,9 +24,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="min-h-screen flex flex-col">
-        <Navbar /> {/* Assuming Navbar is imported in the layout file */}
-        <main className="flex-grow">{children}</main>
-        <Footer /> {/* Assuming Footer is imported in the layout file */}
+          <Navbar /> {/* Assuming Navbar is imported in the layout file */}
+          <main className="flex-grow">{children}</main>
+          <Footer /> {/* Assuming Footer is imported in the layout file */}
       </body>
     </html>
   );
