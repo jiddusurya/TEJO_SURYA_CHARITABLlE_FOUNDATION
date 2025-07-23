@@ -98,33 +98,11 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden lg:flex items-center space-x-4">
-            {/* User Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setUserDropdownOpen(!isUserDropdownOpen)}
-                className="flex items-center text-gray-600 hover:text-red-500"
-              >
-                Shamitha <Icon name="chevronDown" className={`h-4 w-4 ml-1 transition-transform ${isUserDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {isUserDropdownOpen && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 border border-gray-200">
-                  <button
-                    onClick={() => {
-                      console.log("Logout clicked");
-                      setUserDropdownOpen(false);
-                    }}
-                    className="w-full text-left flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600"
-                  >
-                    <Icon name="logOut" className="h-4 w-4 mr-3" />
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
+            
 
             <Link href="/donate">
-              <button className="bg-red-500 text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:bg-red-600 transition-all duration-300 flex items-center">
-                Donate
+              <button className="bg-red-500 text-white font-bold text-xl px-5 py-2 rounded-lg shadow-md hover:bg-red-600 transition-all duration-300 flex items-center">
+                Donate Now
               </button>
             </Link>
           </div>
@@ -170,21 +148,10 @@ export default function Navbar() {
                 )}
               </div>
             ))}
-            <div className="border-t border-gray-100 mt-2 pt-2">
-              <Link href="#" className="flex items-center py-2 text-gray-600 hover:text-red-500">
-                Shamitha <Icon name="chevronDown" className="h-5 w-5 ml-auto" />
-              </Link>
-              <button
-                onClick={() => console.log("Logout clicked")}
-                className="w-full text-left flex items-center py-2 text-gray-600 hover:text-red-500"
-              >
-                <Icon name="logOut" className="h-5 w-5 mr-2" />
-                Logout
-              </button>
-            </div>
+            
             <Link href="/donate">
-              <button className="w-full bg-red-500 text-white font-semibold px-5 py-3 rounded-lg shadow-md hover:bg-red-600 transition-all duration-300 flex items-center justify-center mt-2">
-                Donate
+              <button className="w-full bg-red-500 text-white font-bold text-md px-5 py-3 rounded-lg shadow-md hover:bg-red-600 transition-all duration-300 flex items-center justify-center mt-2">
+                Donate Now
               </button>
             </Link>
           </nav>

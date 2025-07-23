@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import Link from 'next/link';
 
 // Helper component for Icons using inline SVGs
 const Icon = ({ name, className }) => {
@@ -84,11 +85,16 @@ export default function VolunteerPage() {
                         <HelpCard key={option.title} {...option} />
                     ))}
                 </div>
+                <div className="mt-12 text-center">
+                  <Link href="#volunteer-form" className="bg-orange-500 text-white font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-orange-600 transition-colors sticky bottom-3">
+                    Join Us Now
+                  </Link>
+                </div>
             </div>
         </section>
 
         {/* Become a Volunteer Section */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white" id='volunteer-form'>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
                 <div className="bg-amber-50 p-8 md:p-12 rounded-2xl shadow-xl border border-gray-200">
                     <h2 className="text-3xl font-bold text-gray-800 text-center mb-2">Become a Volunteer</h2>
