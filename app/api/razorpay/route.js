@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import Razorpay from "razorpay";
 
-// Initialize Razorpay instance with your keys
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
@@ -9,34 +8,60 @@ const razorpay = new Razorpay({
 
 export async function POST(request) {
   try {
-    // Get the amount from the request body
-    const { amount, currency = "INR" } = await request.json();
+    // The 'currency' is now passed from the frontend.
+    const { amount, currency, type } = await request.json();
 
-    // Create Razorpay order options
+    // Validate that currency is provided.
+    if (!currency) {
+        return new NextResponse("Currency is required", { status: 400 });
+    }
+
+    // --- Logic for Monthly Recurring Donations ---
+    if (type === 'monthly') {
+      // **FIX**: Add server-side validation. Razorpay subscriptions for Indian
+      // accounts typically only support INR. This prevents the API call from failing.
+      if (currency !== 'INR') {
+        return new NextResponse("Monthly donations are only supported in INR.", { status: 400 });
+      }
+
+      const plan = await razorpay.plans.create({
+        period: "monthly",
+        interval: 1,
+        item: {
+          name: "Monthly Donation Plan",
+          amount: amount * 100, // Amount in smallest currency unit (e.g., paise or cents)
+          currency: currency,
+          description: "Monthly contribution for a good cause.",
+        },
+      });
+
+      const subscription = await razorpay.subscriptions.create({
+        plan_id: plan.id,
+        customer_notify: 1,
+        quantity: 1,
+        total_count: 12, // e.g., for 1 year
+      });
+
+      return NextResponse.json({ subscription_id: subscription.id, amount: plan.item.amount, currency: plan.item.currency });
+    }
+
+    // --- Logic for One-Time Donations (existing logic) ---
     const options = {
-      amount: amount * 100, // amount in the smallest currency unit (e.g., paise)
+      amount: amount * 100,
       currency,
-      receipt: `receipt_order_${Date.now()}`, // a unique receipt ID
+      receipt: `receipt_order_${Date.now()}`,
     };
 
-    // Create the order
     const order = await razorpay.orders.create(options);
 
     if (!order) {
-      return NextResponse.json(
-        { error: "Order creation failed" },
-        { status: 500 }
-      );
+      return new NextResponse("Order creation failed", { status: 500 });
     }
 
-    // Return the order details to the frontend
-    return NextResponse.json(order, { status: 200 });
+    return NextResponse.json(order);
 
   } catch (error) {
-    console.error("Razorpay API Error:", error);
-    return NextResponse.json(
-      { error: "An internal server error occurred" },
-      { status: 500 }
-    );
+    console.error("RAZORPAY_API_ERROR", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

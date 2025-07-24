@@ -2,6 +2,7 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import WhatsappButton from './components/WhatsappButton';
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
           <Navbar /> {/* Assuming Navbar is imported in the layout file */}
           <main className="flex-grow">{children}</main>
           <Footer /> {/* Assuming Footer is imported in the layout file */}
+          <WhatsappButton/>
       </body>
     </html>
   );

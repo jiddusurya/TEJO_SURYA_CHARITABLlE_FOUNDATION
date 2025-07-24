@@ -35,8 +35,7 @@ export default function Navbar() {
     { label: 'Home', href: '/' },
     {
       label: 'About Us', href: '#', dropdown: [
-        { label: 'Mission', href: '/mission', icon: 'target' },
-        { label: 'Vision', href: '/vision', icon: 'eye' },
+        { label: 'Mission and Vision', href: '/mission-and-vision', icon: 'target' },
         { label: 'Core Team', href: '/core-team', icon: 'users' },
         { label: 'Advisory Board', href: '/advisory-board', icon: 'clipboard' },
         { label: 'Mentorship Forums', href: '/mentorship-forums', icon: 'users' },

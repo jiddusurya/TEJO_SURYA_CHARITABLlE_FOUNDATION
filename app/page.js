@@ -232,10 +232,11 @@ export default function App() {
                                 </ul>r-80
                                 <p className="mt-6 text-gray-500 italic">Here is an Opportunity to join hands and contribute in our mission to bring an impact in the society. As our Indian Culture always taught us "Vasudhaiva Kutumbakam".</p>
                                 <div className="mt-6 flex flex-wrap gap-2">
-                                    <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">12A & 80G</span>
-                                    <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">ISO Certified</span>
+                                    <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">80G</span>
+                                    <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">12A</span>
                                     <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">FCRA Registered</span>
                                     <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">CSR-1 Registered</span>
+                                    <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">ISO Certified</span>
                                 </div>
                                 <div className="mt-8 flex flex-wrap gap-4">
                                     <Link href={"/mission"}>

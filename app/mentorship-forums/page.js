@@ -163,7 +163,7 @@ export default function MentorshipForumPage() {
               Connect with our mentorship community for confidential, direct support, session updates, and to ask your questions in a safe space.
             </p>
             <div className="mt-8">
-              <a href='https://chat.whatsapp.com/your-community-link-here' target='_blank'>
+              <a href='https://api.whatsapp.com/send/?phone=919573709185&text&type=phone_number&app_absent=0' target='_blank'>
                 <button className="bg-green-500 text-white font-bold px-8 py-4 rounded-lg shadow-lg hover:bg-green-600 transition-colors flex items-center justify-center mx-auto">
                   <Icon name="chat" className="h-6 w-6 mr-3" />
                   Connect on WhatsApp
@@ -208,12 +208,14 @@ export default function MentorshipForumPage() {
               Don't let questions about menstrual health go unanswered. Our expert mentors are here to provide safe, confidential, and professional guidance.
             </p>
             <div className="mt-10">
-              <button className="bg-white text-green-800 font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-200 transition-colors">
-                <span>
-                <Icon name="chat" className="h-6 w-6 mr-3" />
-                </span>
-                Request Mentorship
-              </button>
+              <a href='https://api.whatsapp.com/send/?phone=919573709185&text&type=phone_number&app_absent=0' target='_blank'>
+                <button className="bg-white text-green-800 font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-200 transition-colors flex items-center justify-center mx-auto">
+                  <span>
+                    <Icon name="chat" className="h-6 w-6 mr-3" />
+                  </span>
+                  Request Mentorship
+                </button>
+              </a>
             </div>
           </div>
         </section>

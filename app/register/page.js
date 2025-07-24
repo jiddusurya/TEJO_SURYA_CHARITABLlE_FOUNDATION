@@ -44,7 +44,7 @@ export default function JoinCommunityPage() {
                 <div className="inline-block p-4 bg-orange-100 rounded-full mb-6 shadow-sm">
                     <Icon name="userPlus" className="h-10 w-10 text-orange-500" />
                 </div>
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Join Our Community</h1>
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Register Your School</h1>
                 <p className="mt-4 max-w-3xl mx-auto text-gray-600 text-lg">
                     Register to access our comprehensive menstrual health curriculum, resources, and join thousands of educators and advocates making a difference.
                 </p>
@@ -76,8 +76,12 @@ export default function JoinCommunityPage() {
                                 </div>
                             </div>
                             <div>
-                                <label htmlFor="organization" className="block text-sm font-medium text-gray-700 mb-1">Organization/School (Optional)</label>
+                                <label htmlFor="organization" className="block text-sm font-medium text-gray-700 mb-1">Organization/School</label>
                                 <input type="text" id="organization" placeholder="Enter your organization or school name" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500" />
+                            </div>
+                            <div>
+                                <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                                <input type="text" id="address" placeholder="Enter your address" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500" />
                             </div>
                             <div className="text-center pt-2">
                                 <button type="submit" className="w-full bg-orange-500 text-white font-bold px-8 py-3 rounded-lg shadow-lg hover:bg-orange-600 transition-colors">
