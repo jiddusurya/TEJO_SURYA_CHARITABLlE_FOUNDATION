@@ -23,7 +23,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning={true}>
       <body className="min-h-screen flex flex-col">
           <Navbar /> {/* Assuming Navbar is imported in the layout file */}
           <main className="flex-grow">{children}</main>
