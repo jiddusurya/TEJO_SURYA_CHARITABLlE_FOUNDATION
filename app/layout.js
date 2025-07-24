@@ -19,6 +19,30 @@ const poppins = Poppins({
 export const metadata = {
   title: "Tejo Surya Foundation",
   description: "Empowering girls and women through menstrual health education and community support.",
+  keywords: [
+    "Tejo Surya Foundation",
+    "NGO",
+    "Non-profit",
+    "Menstrual Health",
+  ],
+  icons: {
+    icon: "/logo.png",
+  },
+  openGraph: {
+    title: "Tejo Surya Foundation",
+    description: "Empowering girls and women through menstrual health education and community support.",
+    url: "https://devtoolboxvvsg.vercel.app/",
+    siteName: "Tejo Surya Foundation",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "DevToolbox"
+      }
+    ],
+    type: "website"
+  }
 };
 
 export default function RootLayout({ children }) {

@@ -118,7 +118,7 @@ export default function CollaboratePage() {
         <section className="py-20 bg-white" id='proposal-form'>
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
             <div className="bg-amber-50 p-8 md:p-12 rounded-2xl shadow-xl border border-gray-200">
-              <h2 className="text-3xl font-bold text-gray-800 text-center mb-2">Partnership Proposal</h2>
+              {/* <h2 className="text-3xl font-bold text-gray-800 text-center mb-2">Partnership Proposal</h2>
               <p className="text-center text-gray-600 mb-8">Tell us about your organization and how we can work together</p>
               <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -179,7 +179,8 @@ export default function CollaboratePage() {
                     Submit Proposal
                   </button>
                 </div>
-              </form>
+              </form> */}
+              <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSchYjOcq-L_EXmwoFVLwcsEKT_4jGuioctbfRO2tpjDdpJAng/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             </div>
           </div>
         </section>
