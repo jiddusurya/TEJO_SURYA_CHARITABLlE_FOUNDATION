@@ -31,14 +31,14 @@ export const metadata = {
   openGraph: {
     title: "Tejo Surya Foundation",
     description: "Empowering girls and women through menstrual health education and community support.",
-    url: "https://devtoolboxvvsg.vercel.app/",
+    url: "http://tejosuryafoundation.org/",
     siteName: "Tejo Surya Foundation",
     images: [
       {
         url: "/logo.png",
         width: 1200,
         height: 630,
-        alt: "DevToolbox"
+        alt: "Tejo Surya Foundation"
       }
     ],
     type: "website"
