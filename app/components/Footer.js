@@ -35,13 +35,12 @@ export default function Footer() {
                     <div>
                         <h3 className="font-bold text-white mb-4">Quick Links</h3>
                         <ul className="space-y-3 text-sm">
-                            <li><Link href="/vision" className="text-gray-400 hover:text-white">Vision</Link></li>
-                            <li><Link href="/mission" className="text-gray-400 hover:text-white">Mission</Link></li>
+                            <li><Link href="/mission-and-vision" className="text-gray-400 hover:text-white">Mission And Vision</Link></li>
                             <li><Link href="/our-team" className="text-gray-400 hover:text-white">Our Team</Link></li>
-                            <li><Link href="/advisory-board" className="text-gray-400 hover:text-white">Advisory Board</Link></li>
-                            <li><Link href="/mentorship-forums" className="text-gray-400 hover:text-white">Mentorship Forums</Link></li>
+                            <li><Link href="/impact-stories" className="text-gray-400 hover:text-white">Impact Stories</Link></li>
                             <li><Link href="/annual-reports" className="text-gray-400 hover:text-white">Annual Reports</Link></li>
                             <li><Link href="/gallery" className="text-gray-400 hover:text-white">Gallery</Link></li>
+                            <li><Link href="/register" className="text-gray-400 hover:text-white">Register Your School</Link></li>
                         </ul>
                     </div>
                     {/* Get Involved */}
@@ -55,7 +54,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="mt-12 border-t border-gray-700 pt-8 text-center text-sm text-gray-500">
-                    <p>&copy; 2025 Tejo Surya Charitable Foundation. All rights reserved.</p>
+                    <p>&copy; 2021–2025 Tejo Surya Charitable Foundation. All rights reserved.</p>
                     <button className="bg-orange-600 text-white font-bold px-8 py-3 rounded-lg shadow-lg hover:bg-orange-700 transition-colors m-4">
                         Support Our Mission
                     </button>

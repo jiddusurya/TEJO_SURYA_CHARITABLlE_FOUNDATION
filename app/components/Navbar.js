@@ -43,9 +43,9 @@ export default function Navbar() {
     },
     {
       label: 'Get Involved', href: '#', dropdown: [
-        { label: 'Donate', href: '/donate', icon: 'rupee' },
         { label: 'Volunteer', href: '/volunteer', icon: 'userCheck' },
         { label: 'Collaborate', href: '/collaborate', icon: 'heart' },
+        { label: 'Donate', href: '/donate', icon: 'rupee' },
       ]
     },
     {
@@ -55,6 +55,8 @@ export default function Navbar() {
       ]
     },
     { label: 'Gallery', href: '/gallery' },
+    { label: 'Register', href: '/register' },
+
   ];
 
   return (
@@ -100,7 +102,7 @@ export default function Navbar() {
             
 
             <Link href="/donate">
-              <button className="bg-red-500 text-white font-bold text-xl px-5 py-2 rounded-lg shadow-md hover:bg-red-600 transition-all duration-300 flex items-center">
+              <button className="bg-red-500 text-white font-bold text-xl md:text-md px-5 py-2 rounded-lg shadow-md hover:bg-red-600 transition-all duration-300 flex items-center">
                 Donate Now
               </button>
             </Link>
@@ -149,7 +151,7 @@ export default function Navbar() {
             ))}
             
             <Link href="/donate">
-              <button className="w-full bg-red-500 text-white font-bold text-md px-5 py-3 rounded-lg shadow-md hover:bg-red-600 transition-all duration-300 flex items-center justify-center mt-2">
+              <button className="w-full bg-orange-600 text-white font-bold text-md px-5 py-3 rounded-lg shadow-md hover:bg-orange-700 transition-all duration-300 flex items-center justify-center mt-2">
                 Donate Now
               </button>
             </Link>

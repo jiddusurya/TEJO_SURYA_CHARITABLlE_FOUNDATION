@@ -239,7 +239,7 @@ export default function App() {
                                     <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">ISO Certified</span>
                                 </div>
                                 <div className="mt-8 flex flex-wrap gap-4">
-                                    <Link href={"/mission"}>
+                                    <Link href={"/mission-and-vision"}>
                                         <button className="bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-gray-900 transition-colors">Learn More</button>
                                     </Link>
                                     <Link href={"/donate"}>

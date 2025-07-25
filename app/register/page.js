@@ -46,7 +46,7 @@ export default function JoinCommunityPage() {
                         </div>
                         <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Register Your School</h1>
                         <p className="mt-4 max-w-3xl mx-auto text-gray-600 text-lg">
-                            Register to access our comprehensive menstrual health curriculum, resources, and join thousands of educators and advocates making a difference.
+                            Register now to access our menstrual health curriculum, support resources, and join thousands of hearts working to uplift young girls through awareness and dignity.
                         </p>
                     </div>
                 </section>
@@ -91,7 +91,7 @@ export default function JoinCommunityPage() {
                         </form>
                     </div> */}
                             <div className="bg-white p-8 md:p-10 rounded-2xl shadow-2xl border border-gray-200">
-                                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfFjeaxdnOh-8OTLKLV7VTRa9g7ixPxhoWIuuw_H7qsM_77Dw/viewform?embedded=true" width="640" height="700" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfFjeaxdnOh-8OTLKLV7VTRa9g7ixPxhoWIuuw_H7qsM_77Dw/viewform?embedded=true" className='w-full'  height="700" frameBorder="0" marginHeight="0" marginWidth="0">Loading…</iframe>
                             </div>
 
                             {/* Why Join Us? Info */}

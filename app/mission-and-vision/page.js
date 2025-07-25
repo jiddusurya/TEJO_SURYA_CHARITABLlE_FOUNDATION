@@ -93,7 +93,7 @@ const AnimatedCounter = ({ end, label, suffix = '', prefix = '', formatAsLakh = 
 
     return (
         <div ref={ref} className="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-200 text-center transition-transform hover:scale-105">
-            <p className="text-5xl md:text-6xl font-bold text-red-500">
+            <p className="text-3xl md:text-4xl font-bold text-red-500">
                 {prefix}{formatNumber(count)}{suffix}{formatAsLakh && ' Lakh'}
             </p>
             <p className="text-gray-600 mt-2 font-semibold">{label}</p>
@@ -127,7 +127,7 @@ export default function MissionAndVisionPage() {
                         <div className="grid md:grid-cols-2 gap-12 items-center">
                              {/* Left Column: Mission Content */}
                              <div className="p-4">
-                                <div className='bg-gradient-to-r from-orange-600 to-yellow-600 p-6 rounded-2xl sm:p-8 text-white mb-8'>
+                                <div className='bg-gradient-to-r from-rose-800 to-red-600 p-6 rounded-2xl sm:p-8 text-white mb-8'>
                                      <h2 className="text-2xl font-bold mb-4">Empowering Through Education</h2>
                                      <p className=" mb-6">
                                          We believe that knowledge is power. Through our comprehensive educational programs, we provide girls and women with the information they need to make informed decisions about their health and well-being.
@@ -187,7 +187,7 @@ export default function MissionAndVisionPage() {
                             A world where every girl and woman has the knowledge, resources, and support to manage her menstrual health with dignity and confidence.
                         </p>
                         <div className="mt-8">
-                            <div className="bg-rose-800 text-white text-center py-6 px-8 rounded-2xl shadow-lg max-w-4xl mx-auto">
+                            <div className="bg-gradient-to-r from-rose-800 to-red-600 text-white text-center py-6 px-8 rounded-2xl shadow-lg max-w-4xl mx-auto">
                                 <h2 className="text-2xl md:text-3xl font-semibold italic">"Healthy Periods. Happy Girl Children. Stronger Nation."</h2>
                             </div>
                         </div>
