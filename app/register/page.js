@@ -29,10 +29,13 @@ const CertificationCard = ({ icon, title, description }) => (
 export default function JoinCommunityPage() {
 
     const certifications = [
-        { icon: 'award', title: "FCRA Certified", description: "Foreign Contribution Regulation Act" },
-        { icon: 'checkCircle', title: "ISO Certified", description: "International Standards" },
-        { icon: 'globe', title: "NRI Support", description: "Global Community" },
-        { icon: 'heart', title: "5000+ Lives", description: "Impacted & Empowered" }
+    { icon: 'award', title: "FCRA Certified", description: "Foreign Contribution Regulation Act" },
+    { icon: 'checkCircle', title: "ISO Certified", description: "International Standards" },
+    { icon: 'globe', title: "NRI Support", description: "Global Community" },
+    { icon: 'heart', title: "5000+ Lives", description: "Impacted & Empowered" },
+    { icon: 'checkCircle', title: "12 AA Certified", description: "Certified for donations in India" },
+    { icon: 'checkCircle', title: "80 G Certified", description: "Donors can claim tax exemptions" },
+    { icon: 'award', title: "CSR 1 Certified", description: "Companies & Organizations can donate through CSR" }
     ];
 
     return (

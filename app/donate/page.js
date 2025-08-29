@@ -1,5 +1,5 @@
-
 "use client";
+import Image from 'next/image';
 import React, { useState, useEffect, useRef } from 'react';
 
 // --- Reusable Icon Component ---
@@ -31,6 +31,7 @@ const DonationModal = ({ isOpen, onClose, handleDonate, loading }) => {
     const [wants80G, setWants80G] = useState(false);
     const [captcha, setCaptcha] = useState('');
     const [agreedToTerms, setAgreedToTerms] = useState(false);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         if (citizenship === 'foreign') {
@@ -53,11 +54,42 @@ const DonationModal = ({ isOpen, onClose, handleDonate, loading }) => {
         currentDonationAmounts = indianMonthlyAmounts;
     }
 
-    const handleNext = () => setStep(step + 1);
+    const handleNext = () => {
+        if (step === 2) {
+            // Validate amount before moving to step 3
+            let amountError = null;
+            if (!selectedAmount) {
+                amountError = "Please select a donation amount";
+            }
+            if (selectedAmount === 'other' && (!customAmount || isNaN(customAmount) || Number(customAmount) <= 0)) {
+                amountError = "Please enter a valid custom amount";
+            }
+            if (amountError) {
+                setErrors(prev => ({ ...prev, amount: amountError }));
+                return; // Prevent going to next step
+            } else {
+                setErrors(prev => ({ ...prev, amount: undefined }));
+            }
+        }
+        setStep(step + 1);
+    };
     const handleBack = () => setStep(step - 1);
+
+    const validateForm = () => {
+        const newErrors = {};
+        if (!donor.fullName.trim()) newErrors.fullName = "Full Name is required";
+        if (!donor.email.trim()) newErrors.email = "Email is required";
+        if (!donor.whatsapp.trim()) newErrors.whatsapp = "Whatsapp number is required";
+        if (!agreedToTerms) newErrors.terms = "You must agree to the Terms and Conditions";
+        return newErrors;
+    };
 
     const onFormSubmit = (e) => {
         e.preventDefault();
+        const newErrors = validateForm();
+        setErrors(newErrors);
+        if (Object.keys(newErrors).length > 0) return;
+
         const formData = {
             amount: selectedAmount === 'other' ? parseFloat(customAmount) : selectedAmount,
             citizenship,
@@ -142,6 +174,9 @@ const DonationModal = ({ isOpen, onClose, handleDonate, loading }) => {
                                         </label>
                                         <input type="number" placeholder="Amount" value={customAmount} onChange={(e) => setCustomAmount(e.target.value)} onFocus={() => setSelectedAmount('other')} className="w-full col-span-2 sm:col-span-1 px-4 py-2 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" />
                                     </div>
+                                    {errors.amount && (
+                                        <p className="text-red-500 text-sm mt-2">{errors.amount}</p>
+                                    )}
                                 </div>
                              </div>
                         )}
@@ -164,8 +199,11 @@ const DonationModal = ({ isOpen, onClose, handleDonate, loading }) => {
                                             </select>
                                             <input type="text" name="fullName" placeholder="Full Name*" value={donor.fullName} onChange={(e) => setDonor({...donor, fullName: e.target.value})} required className="w-full px-4 py-3 rounded-lg border border-gray-300" />
                                         </div>
+                                        {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName}</p>}
                                         <input type="email" name="email" placeholder="Email*" value={donor.email} onChange={(e) => setDonor({...donor, email: e.target.value})} required className="w-full px-4 py-3 rounded-lg border border-gray-300" />
+                                        {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                                         <input type="tel" name="whatsapp" placeholder="Whatsapp number*" value={donor.whatsapp} onChange={(e) => setDonor({...donor, whatsapp: e.target.value})} required className="w-full px-4 py-3 rounded-lg border border-gray-300" />
+                                        {errors.whatsapp && <p className="text-red-500 text-sm">{errors.whatsapp}</p>}
                                     </div>
                                 </div>
                                 {/* Terms & Conditions */}
@@ -174,6 +212,7 @@ const DonationModal = ({ isOpen, onClose, handleDonate, loading }) => {
                                         <input type="checkbox" checked={agreedToTerms} onChange={() => setAgreedToTerms(!agreedToTerms)} className="form-checkbox text-blue-600 h-5 w-5" />
                                         <span className="ml-3">I agree to the <a href="#" className="text-blue-600 hover:underline">Terms and Conditions</a>.</span>
                                     </label>
+                                    {errors.terms && <p className="text-red-500 text-sm">{errors.terms}</p>}
                                 </div>
                             </div>
                         )}
@@ -192,7 +231,11 @@ const DonationModal = ({ isOpen, onClose, handleDonate, loading }) => {
                                 </button>
                             )}
                             {step === 3 && (
-                                <button type="submit" disabled={loading} className="bg-blue-600 text-white font-bold px-12 py-3 rounded-lg shadow-lg hover:bg-blue-700 w-full sm:w-auto disabled:bg-blue-400">
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className={`bg-blue-600 text-white font-bold px-12 py-3 rounded-lg shadow-lg hover:bg-blue-700 w-full sm:w-auto disabled:bg-blue-400 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                >
                                     {loading ? 'Processing...' : 'Donate'}
                                 </button>
                             )}
@@ -215,7 +258,11 @@ const DonationImpactCard = ({ amount, title, description }) => (
 
 const NriSupportCard = ({ country, icon, description }) => (
     <div className="bg-white/20 backdrop-blur-sm p-8 rounded-2xl text-center text-white border border-white/30">
-        <Icon name={icon} className="h-16 w-24 rounded-md mx-auto mb-4 object-cover" />
+        {country==="Australia" ? (
+            <img src="https://res.cloudinary.com/dqwcr4y98/image/upload/v1756455472/2f064345-3c69-4a73-9ff1-458b4fdaf37b_m0tkfz.jpg" alt="Australia" className="h-16 w-30 rounded-md mx-auto mb-4 object-cover" />
+        ) : (
+            <Icon name={icon} className="h-16 w-24 rounded-md mx-auto mb-4 object-cover" />
+        )}
         <h3 className="text-2xl font-bold">{country}</h3>
         <p className="mt-2">{description}</p>
     </div>
@@ -306,7 +353,7 @@ export default function SupportPage() {
     const impactLevels = [
         { amount: 500, title: "Provides hygiene kits for 2 girls", description: "Essential supplies for one month" },
         { amount: 1500, title: "Sponsors health education session", description: "Reaches 50+ students" },
-        { amount: 5000, title: "Supports a full program", description: "For one school" }
+        { amount: 50000, title: "Supports a full program", description: "For one school" }
     ];
     const nriSupport = [
         { country: "USA", icon: "usa", description: "Supporting 50+ girls monthly" },
@@ -329,7 +376,7 @@ export default function SupportPage() {
                         <div className="mt-8">
                              <button 
                                 onClick={() => setIsModalOpen(true)}
-                                className="bg-blue-600 text-white font-bold px-10 py-4 rounded-lg shadow-lg hover:bg-blue-700 transition-all transform hover:scale-105"
+                                className="bg-red-500 text-white font-bold px-10 py-4 rounded-lg shadow-lg hover:bg-red-700 transition-all transform hover:scale-105"
                             >
                                 Donate Now
                             </button>

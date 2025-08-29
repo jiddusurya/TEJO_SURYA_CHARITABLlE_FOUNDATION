@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 // Helper component for Icons using inline SVGs
 const Icon = ({ name, className }) => {
@@ -37,6 +37,15 @@ const PartnershipCard = ({ icon, title, description, color }) => {
 
 // Main Page Component
 export default function CollaboratePage() {
+  const [showForm, setShowForm] = useState(false);
+  const formRef = useRef(null);
+
+  const handleJoinClick = () => {
+    setShowForm(true);
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 100); // Wait for render
+  };
 
   const partnershipOptions = [
     {
@@ -107,83 +116,25 @@ export default function CollaboratePage() {
                 <PartnershipCard key={option.title} {...option} />
               ))}
             </div>
-            
+            <button
+              onClick={handleJoinClick}
+              className="bg-orange-500 text-white font-bold px-8 py-3 rounded-lg shadow-lg hover:bg-orange-600 transition-colors sticky bottom-2 left-[45vw]"
+            >
+              Join Us Now
+            </button>
           </div>
         </section>
-          <Link href="#proposal-form" className="bg-orange-500 text-white font-bold px-8 py-3 rounded-lg shadow-lg hover:bg-orange-600 transition-colors sticky bottom-2 left-[45vw]">
-            Join Us Now
-          </Link>
 
         {/* Partnership Proposal Section */}
-        <section className="py-20 bg-white" id='proposal-form'>
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-            <div className="bg-amber-50 p-8 md:p-12 rounded-2xl shadow-xl border border-gray-200">
-              {/* <h2 className="text-3xl font-bold text-gray-800 text-center mb-2">Partnership Proposal</h2>
-              <p className="text-center text-gray-600 mb-8">Tell us about your organization and how we can work together</p>
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="orgName" className="block text-sm font-medium text-gray-700 mb-1">Organization Name *</label>
-                  <input type="text" id="orgName" placeholder="Enter organization name" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500" />
-                </div>
-                <div>
-                  <label htmlFor="contactPerson" className="block text-sm font-medium text-gray-700 mb-1">Contact Person</label>
-                  <input type="text" id="contactPerson" placeholder="Enter contact person's name" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500" />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
-                  <input type="email" id="email" placeholder="Enter email address" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500" />
-                </div>
-                <div>
-                  <label htmlFor="mobile" className="block text-sm font-medium text-gray-700 mb-1">Mobile Number *</label>
-                  <div className="flex">
-                    <span className="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-gray-300 bg-gray-100 text-gray-500">+91</span>
-                    <input type="tel" id="mobile" placeholder="Enter mobile number" className="w-full px-4 py-3 rounded-r-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500" />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="orgType" className="block text-sm font-medium text-gray-700 mb-1">Organization Type *</label>
-                  <select id="orgType" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500">
-                    <option>Select organization type</option>
-                    <option>Corporate</option>
-                    <option>NGO</option>
-                    <option>Educational Institution</option>
-                    <option>Healthcare</option>
-                    <option>Government</option>
-                    <option>International</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="collabType" className="block text-sm font-medium text-gray-700 mb-1">Collaboration Type</label>
-                  <select id="collabType" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500">
-                    <option>What can you offer?</option>
-                    <option>Funding</option>
-                    <option>Volunteering</option>
-                    <option>In-kind Donation</option>
-                    <option>Pro-bono Services</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">Location</label>
-                  <input type="text" id="location" placeholder="Your organization's location" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500" />
-                </div>
-                <div>
-                  <label htmlFor="website" className="block text-sm font-medium text-gray-700 mb-1">Website</label>
-                  <input type="url" id="website" placeholder="Organization's website" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500" />
-                </div>
-                <div className="md:col-span-2">
-                  <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">Collaboration Description *</label>
-                  <textarea id="description" rows="4" placeholder="Describe your organization and the proposed collaboration in detail..." className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500"></textarea>
-                </div>
-                <div className="md:col-span-2 text-center">
-                  <button type="submit" className="bg-orange-500 text-white font-bold px-8 py-3 rounded-lg shadow-lg hover:bg-orange-600 transition-colors">
-                    Submit Proposal
-                  </button>
-                </div>
-              </form> */}
-              <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSchYjOcq-L_EXmwoFVLwcsEKT_4jGuioctbfRO2tpjDdpJAng/viewform?embedded=true" className='w-full' height="800" frameBorder="0" marginHeight="0" marginWidth="0">Loading…</iframe>
+        {showForm && (
+          <section className="py-20 bg-white" ref={formRef}>
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+              <div className="bg-amber-50 p-8 md:p-12 rounded-2xl shadow-xl border border-gray-200">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSchYjOcq-L_EXmwoFVLwcsEKT_4jGuioctbfRO2tpjDdpJAng/viewform?embedded=true" className='w-full' height="800" frameBorder="0" marginHeight="0" marginWidth="0">Loading…</iframe>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
       </main>
     </div>
   );

@@ -114,7 +114,7 @@ export default function HomePage() {
             description: "Providing health check-ups, nutritional support, and companionship to elderly women in underserved communities.",
         },
         {
-            imgSrc: "https://res.cloudinary.com/dqwcr4y98/image/upload/v1756444114/Girl_education_hcbxzb.jpg",
+            imgSrc: "https://res.cloudinary.com/dqwcr4y98/image/upload/v1756453942/caa6ba48-51cf-4dd9-9a6b-12549b86229a_uljpwz.jpg",
             title: "Underprivileged Girl Child Education",
             description: "Sponsoring the education of girls from low-income families, ensuring they have the tools to build a brighter future.",
         },
@@ -246,8 +246,8 @@ export default function HomePage() {
                                     {otherInitiatives.map((initiative) => (
                                         <div key={initiative.title} className="bg-white p-6 rounded-xl shadow-md transition-transform hover:-translate-y-2 flex flex-col items-center text-center md:flex-row md:text-left md:items-start">
                                             <div className='text-center'>
-                                                <h3 className="text-xl font-bold text-gray-800">{initiative.title}</h3>
-                                                <img src={initiative.imgSrc} alt={initiative.title} className="min-h-70 w-full mb-4 md:mb-0 md:mr-6 rounded-lg object-cover flex-shrink-0" />
+                                                <h3 className="text-lg font-bold text-gray-800">{initiative.title}</h3>
+                                                <img src={initiative.imgSrc} alt={initiative.title} className=" w-full mb-4 md:mb-0 md:mr-6 rounded-lg object-cover flex-shrink-0" />
                                                 <p className="mt-2 text-gray-600 text-md">{initiative.description}</p>
                                             </div>
                                         </div>
