@@ -76,18 +76,20 @@ export default function Navbar() {
               <div
                 key={link.label}
                 className="relative"
-                onMouseEnter={() => link.dropdown && setOpenDropdown(link.label)}
-                onMouseLeave={() => link.dropdown && setOpenDropdown(null)}
               >
-                <Link href={link.href} className="flex items-center text-gray-600 hover:text-red-500 transition-colors px-4 py-2 rounded-md">
+                <button
+                  type="button"
+                  className="flex items-center text-gray-600 hover:text-red-500 transition-colors px-4 py-2 rounded-md focus:outline-none"
+                  onClick={() => link.dropdown && setOpenDropdown(openDropdown === link.label ? null : link.label)}
+                >
                   {link.icon && <Icon name={link.icon} className="h-4 w-4 mr-2" />}
                   {link.label}
                   {link.dropdown && <Icon name="chevronDown" className={`h-4 w-4 ml-1 transition-transform ${openDropdown === link.label ? 'rotate-180' : ''}`} />}
-                </Link>
+                </button>
                 {link.dropdown && openDropdown === link.label && (
                   <div className="absolute top-full left-0 mt-1 bg-white shadow-lg rounded-lg border border-gray-200 w-56 py-2 z-20">
                     {link.dropdown.map(item => (
-                      <Link key={item.label} href={item.href} className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600">
+                      <Link key={item.label} href={item.href} className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600" onClick={() => setOpenDropdown(null)}>
                         <Icon name={item.icon} className="h-5 w-4 mr-3 text-gray-500" />
                         {item.label}
                       </Link>
@@ -140,7 +142,15 @@ export default function Navbar() {
                 {link.dropdown && openDropdown === link.label && (
                   <div className="pl-8 py-1">
                     {link.dropdown.map(item => (
-                      <Link key={item.label} href={item.href} className="flex items-center py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-md">
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        className="flex items-center py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-md"
+                        onClick={() => {
+                          setOpenDropdown(null);
+                          setMenuOpen(false); // Optionally close the mobile menu too
+                        }}
+                      >
                         <Icon name={item.icon} className="h-4 w-4 mr-3 text-gray-500" />
                         {item.label}
                       </Link>
