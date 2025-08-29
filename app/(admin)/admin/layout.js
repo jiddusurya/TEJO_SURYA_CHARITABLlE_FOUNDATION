@@ -23,9 +23,7 @@ export default function AdminLayout({ children }) {
         { href: '/admin/mentors', label: 'Mentors' },
         { href: '/admin/advisory-board', label: 'Advisory Board' },
         { href: '/admin/core-team', label: 'Core Team' },
-
-
-
+        { href: '/admin/impact-stories', label: 'Impact Stories' }, // New Link
     ];
 
     return (
