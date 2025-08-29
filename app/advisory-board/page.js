@@ -1,7 +1,3 @@
-// This is the complete code for your public-facing Advisory Board page.
-// You can copy and paste this directly into your `app/advisory-board/page.js` file.
-// No backend or admin panel changes are needed for this update.
-
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 
@@ -65,13 +61,33 @@ const AdvisoryBoardMemberCard = ({ member, onReadMore }) => {
     );
 };
 
-// --- Multi-Item Carousel for Board Members ---
+// --- Multi-Item Carousel for Board Members (Updated for Responsiveness) ---
 const AdvisoryBoardCarousel = ({ members, onReadMore }) => {
-    const itemsPerView = 3;
-    const [currentIndex, setCurrentIndex] = useState(itemsPerView);
+    const [itemsPerView, setItemsPerView] = useState(3);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(true);
     const [isPaused, setIsPaused] = useState(false);
     const timeoutRef = useRef(null);
+
+    // Effect to handle responsive number of items
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) { // Tailwind's `md` breakpoint
+                setItemsPerView(1);
+            } else {
+                setItemsPerView(3);
+            }
+        };
+
+        handleResize(); // Set initial value on mount
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Reset index when the view changes to prevent visual bugs
+    useEffect(() => {
+        setCurrentIndex(itemsPerView);
+    }, [itemsPerView]);
 
     const resetTimeout = () => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -79,7 +95,6 @@ const AdvisoryBoardCarousel = ({ members, onReadMore }) => {
 
     const canLoop = members && members.length > itemsPerView;
 
-    // Create a looped array for seamless scrolling
     const loopedMembers = canLoop ? [
         ...members.slice(members.length - itemsPerView),
         ...members,
@@ -93,9 +108,9 @@ const AdvisoryBoardCarousel = ({ members, onReadMore }) => {
             timeoutRef.current = setTimeout(() => goToNext(), 5000);
         }
         return () => resetTimeout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentIndex, isPaused, canLoop]);
 
-    // Effect to handle the jump when the loop resets
     const handleTransitionEnd = () => {
         if (currentIndex === 0) {
             setIsTransitioning(false);
@@ -106,7 +121,6 @@ const AdvisoryBoardCarousel = ({ members, onReadMore }) => {
         }
     };
 
-    // Re-enable transition after the jump
     useEffect(() => {
         if (!isTransitioning) {
             setTimeout(() => setIsTransitioning(true), 50);
@@ -127,10 +141,10 @@ const AdvisoryBoardCarousel = ({ members, onReadMore }) => {
         return <div className="text-center text-gray-500 p-8">Advisory board members will be announced soon.</div>;
     }
     
-    // If there are not enough members to loop, display a static grid
+    // If there aren't enough members to loop, display a static grid
     if (!canLoop) {
         return (
-             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {members.map((member) => (
                     <AdvisoryBoardMemberCard key={member.id} member={member} onReadMore={onReadMore} />
                 ))}
