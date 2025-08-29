@@ -22,9 +22,9 @@ export default function Footer() {
                     <div className="md:col-span-2 lg:col-span-1">
                         <Link href="#" className="flex items-center space-x-2 mb-4">
                             <img src="/logo.png" alt="Tejo Surya Foundation Logo" className="h-10 w-10 rounded-full" />
-                            <span className="text-sm font-bold text-white"><span className='text-xl font-bold'>TEJO SURYA</span><br /><span className='text-xs font-medium'>Charitable Foundation</span></span>
+                            <span className="text-sm font-bold text-white"><span className='text-xl font-bold text-[#ff712c]'>TEJO SURYA</span><br /><span className='text-xs font-medium text-[#073763]'>Charitable Foundation</span></span>
                         </Link>
-                        <p className="text-gray-400 text-sm">Dedicated to promoting menstrual health and hygiene awareness across communities, empowering girls and women to lead a healthier future through education and support.</p>
+                        <p className="text-gray-400 text-sm">Strong Women ! <br /> Stronger Tomorrow !</p>
                         <div className="flex space-x-4 mt-6">
                             <a href="https://www.instagram.com/tejosuryafoundation/" target='_blank' className="text-gray-400 hover:text-white"><Icon name="instagram" className="h-6 w-6" /></a>
                             <a href="https://www.youtube.com/@TejoSuryaFoundation?themeRefresh=1" target='_blank' className="text-gray-400 hover:text-white"><Icon name="youtube" className="h-6 w-6" /></a>
@@ -35,7 +35,7 @@ export default function Footer() {
                     <div>
                         <h3 className="font-bold text-white mb-4">Quick Links</h3>
                         <ul className="space-y-3 text-sm">
-                            <li><Link href="/mission-and-vision" className="text-gray-400 hover:text-white">Mission And Vision</Link></li>
+                            <li><Link href="/vision-and-mission" className="text-gray-400 hover:text-white">Vision & Mission</Link></li>
                             <li><Link href="/our-team" className="text-gray-400 hover:text-white">Our Team</Link></li>
                             <li><Link href="/impact-stories" className="text-gray-400 hover:text-white">Impact Stories</Link></li>
                             <li><Link href="/annual-reports" className="text-gray-400 hover:text-white">Annual Reports</Link></li>

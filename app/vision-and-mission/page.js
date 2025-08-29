@@ -85,11 +85,11 @@ const AnimatedCounter = ({ end, label, suffix = '', prefix = '', formatAsLakh = 
     const count = useCountUp(end, 2000, inView);
 
     const formatNumber = (num) => {
-        if (formatAsLakh) {
-            return (num / 100000).toFixed(0);
-        }
-        return num.toLocaleString('en-IN');
-    };
+    if (formatAsLakh) {
+        return num < 100000 ? num : (num / 100000).toFixed(0);
+    }
+    return num.toLocaleString('en-IN');
+};
 
     return (
         <div ref={ref} className="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-200 text-center transition-transform hover:scale-105">
@@ -104,10 +104,88 @@ const AnimatedCounter = ({ end, label, suffix = '', prefix = '', formatAsLakh = 
 
 // Main Merged Page Component
 export default function MissionAndVisionPage() {
+    const [goalStats, setGoalStats] = useState([]);
+    useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const res = await fetch('/api/goal-stats');
+            const data = await res.json();
+            setGoalStats(data);
+        } catch (error) {
+            console.error("Failed to fetch homepage data:", error);
+        }
+    };
+    fetchData();
+}, []);
+
 
     return (
         <div className="bg-white font-sans">
             <main>
+
+
+                {/* Our Vision Section */}
+                <section className="py-20 text-center bg-gray-50">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="inline-block p-4 bg-gray-200 rounded-full mb-6 shadow-sm">
+                            <Icon name="eye" className="h-10 w-10 text-gray-700" />
+                        </div>
+                        <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Our Vision</h1>
+                        <p className="mt-4 max-w-3xl mx-auto text-gray-600 text-lg"> Born from a school teacher’s wisdom and fueled by a pledge, Tejo Surya Foundation envisions a taboo-free, myth-free & an India without Period Poverty !</p>
+                        <div className="mt-8">
+                            <div className="bg-gradient-to-r from-rose-800 to-red-600 text-white text-center py-6 px-8 rounded-2xl shadow-lg max-w-4xl mx-auto">
+                                <h2 className="text-2xl md:text-3xl font-semibold italic">"Healthy Periods. Happy Girl Children. Stronger Nation."</h2>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Vision Content Section - ADDED BACK */}
+                <section className="py-20 bg-gray-50">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="grid md:grid-cols-2 gap-12 items-center">
+                            {/* Left Column: Vision Image */}
+                            <div className="relative h-full min-h-[450px]">
+                                <img src="https://res.cloudinary.com/dqwcr4y98/image/upload/v1756445374/Empowered_2_zash9y.jpg" alt="Empowered women" className="rounded-2xl shadow-xl w-full h-full object-cover" />
+                                <div className="absolute top-6 right-6 bg-red-500 text-white p-4 rounded-full shadow-lg">
+                                    <Icon name="star" className="h-8 w-8" />
+                                </div>
+                                <div className="absolute bottom-6 left-6 bg-white text-gray-700 p-4 rounded-full shadow-lg">
+                                    <Icon name="sparkle" className="h-8 w-8" />
+                                </div>
+                            </div>
+                            {/* Right Column: Vision Content */}
+                            <div className="p-4">
+                                <div className='bg-gray-800 text-white p-8 rounded-2xl mb-8'>
+                                    <h3 className="text-3xl font-bold mb-2">Creating a Brighter Future</h3>
+                                    <p className="text-gray-300">
+                                        We envision a society where menstruation is no longer a barrier to education, employment, or participation in daily life.
+                                    </p>
+                                </div>
+                                <div className="space-y-6">
+                                    <div className="flex items-start space-x-4">
+                                        <div className="flex-shrink-0 mt-1 p-3 bg-red-100 rounded-full">
+                                            <Icon name="bookOpen" className="h-6 w-6 text-red-500" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-xl text-gray-800">Universal Access to Education</h4>
+                                            <p className="text-gray-600 mt-1">Every girl should have access to comprehensive menstrual health education to make informed decisions.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start space-x-4">
+                                        <div className="flex-shrink-0 mt-1 p-3 bg-red-100 rounded-full">
+                                            <Icon name="star" className="h-6 w-6 text-red-500" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-xl text-gray-800">Dignified and Confident Lives</h4>
+                                            <p className="text-gray-600 mt-1">We want to ensure that girls and women can manage their periods with dignity and without shame or fear.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 {/* Our Mission Section */}
                 <section className="py-20 text-center bg-white">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -115,24 +193,22 @@ export default function MissionAndVisionPage() {
                             <Icon name="target" className="h-10 w-10 text-red-500" />
                         </div>
                         <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Our Mission</h1>
-                        <p className="mt-4 max-w-3xl mx-auto text-gray-600 text-lg">
-                            To empower girls and women with comprehensive menstrual health education, breaking down barriers and creating a future where every girl can thrive with dignity.
-                        </p>
+                        <p className="mt-4 max-w-3xl mx-auto text-gray-600 text-lg"> To help & support every girl from underserved communities and Govt schools, where they can manage their period with dignity and confidence. One School at a Time !                         </p>
                     </div>
                 </section>
-                
+
                 {/* Main Content Section for Mission */}
                 <section className="pb-20 bg-white">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="grid md:grid-cols-2 gap-12 items-center">
-                             {/* Left Column: Mission Content */}
-                             <div className="p-4">
+                            {/* Left Column: Mission Content */}
+                            <div className="p-4">
                                 <div className='bg-gradient-to-r from-rose-800 to-red-600 p-6 rounded-2xl sm:p-8 text-white mb-8'>
-                                     <h2 className="text-2xl font-bold mb-4">Empowering Through Education</h2>
-                                     <p className=" mb-6">
-                                         We believe that knowledge is power. Through our comprehensive educational programs, we provide girls and women with the information they need to make informed decisions about their health and well-being.
-                                     </p>
-                                 </div>
+                                    <h2 className="text-2xl font-bold mb-4">Empowering Through Education</h2>
+                                    <p className=" mb-6">
+                                        We believe that knowledge is power. Through our comprehensive educational programs, we provide girls and women with the information they need to make informed decisions about their health and well-being.
+                                    </p>
+                                </div>
                                 <ul className="space-y-6">
                                     <li className="flex items-start">
                                         <div className="flex-shrink-0 p-3 bg-red-100 rounded-full mr-4 mt-1">
@@ -165,7 +241,7 @@ export default function MissionAndVisionPage() {
                             </div>
                             {/* Right Column: Mission Image */}
                             <div className="relative rounded-2xl overflow-hidden min-h-[450px] flex items-center justify-center shadow-2xl">
-                                <img src="https://placehold.co/600x450/FFF7ED/333?text=Community+Education" alt="Community health education" className="w-full h-full object-cover" />
+                                <img src="https://res.cloudinary.com/dqwcr4y98/image/upload/v1756445431/Community_education_2_zplf4l.jpg" alt="Community health education" className="w-full h-full object-cover" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                                 <div className="absolute bottom-8 left-8 text-white">
                                     <h2 className="text-3xl font-bold">Our Impact in Action</h2>
@@ -175,86 +251,26 @@ export default function MissionAndVisionPage() {
                         </div>
                     </div>
                 </section>
-
-                {/* Our Vision Section */}
-                <section className="py-20 text-center bg-gray-50">
-                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="inline-block p-4 bg-gray-200 rounded-full mb-6 shadow-sm">
-                            <Icon name="eye" className="h-10 w-10 text-gray-700" />
-                        </div>
-                        <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Our Vision</h1>
-                        <p className="mt-4 max-w-3xl mx-auto text-gray-600 text-lg">
-                            A world where every girl and woman has the knowledge, resources, and support to manage her menstrual health with dignity and confidence.
-                        </p>
-                        <div className="mt-8">
-                            <div className="bg-gradient-to-r from-rose-800 to-red-600 text-white text-center py-6 px-8 rounded-2xl shadow-lg max-w-4xl mx-auto">
-                                <h2 className="text-2xl md:text-3xl font-semibold italic">"Healthy Periods. Happy Girl Children. Stronger Nation."</h2>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                
-                {/* Vision Content Section - ADDED BACK */}
-                <section className="py-20 bg-gray-50">
-                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="grid md:grid-cols-2 gap-12 items-center">
-                            {/* Left Column: Vision Image */}
-                            <div className="relative h-full min-h-[450px]">
-                                 <img src="https://placehold.co/600x600/E5E7EB/333?text=Empowered+Women" alt="Empowered women" className="rounded-2xl shadow-xl w-full h-full object-cover" />
-                                 <div className="absolute top-6 right-6 bg-red-500 text-white p-4 rounded-full shadow-lg">
-                                     <Icon name="star" className="h-8 w-8" />
-                                 </div>
-                                 <div className="absolute bottom-6 left-6 bg-white text-gray-700 p-4 rounded-full shadow-lg">
-                                     <Icon name="sparkle" className="h-8 w-8" />
-                                 </div>
-                             </div>
-                             {/* Right Column: Vision Content */}
-                            <div className="p-4">
-                                <div className='bg-gray-800 text-white p-8 rounded-2xl mb-8'>
-                                    <h3 className="text-3xl font-bold mb-2">Creating a Brighter Future</h3>
-                                    <p className="text-gray-300">
-                                        We envision a society where menstruation is no longer a barrier to education, employment, or participation in daily life.
-                                    </p>
-                                </div>
-                                <div className="space-y-6">
-                                    <div className="flex items-start space-x-4">
-                                        <div className="flex-shrink-0 mt-1 p-3 bg-red-100 rounded-full">
-                                            <Icon name="bookOpen" className="h-6 w-6 text-red-500" />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold text-xl text-gray-800">Universal Access to Education</h4>
-                                            <p className="text-gray-600 mt-1">Every girl should have access to comprehensive menstrual health education to make informed decisions.</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start space-x-4">
-                                        <div className="flex-shrink-0 mt-1 p-3 bg-red-100 rounded-full">
-                                            <Icon name="star" className="h-6 w-6 text-red-500" />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold text-xl text-gray-800">Dignified and Confident Lives</h4>
-                                            <p className="text-gray-600 mt-1">We want to ensure that girls and women can manage their periods with dignity and without shame or fear.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
                 {/* Impact & Ambitious Goals Section */}
                 <section className="py-20 bg-white">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12">Our Impact & Goals</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                           <AnimatedCounter end={5000} label="Lives Impacted" suffix="+" />
-                           <AnimatedCounter end={150} label="Schools Visited" suffix="+" />
-                           <AnimatedCounter end={75000} label="High Schools Aimed" />
-                           <AnimatedCounter end={8800000} label="Girls in Need of Support" formatAsLakh={true} />
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12">Our Ambitious Goals</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                            {goalStats.map(goal => (
+                                <AnimatedCounter
+                                    key={goal.id}
+                                    end={goal.count}
+                                    label={goal.label}
+                                    suffix={goal.suffix || ''}
+                                    prefix={goal.prefix || ''}
+                                    formatAsLakh={goal.formatAsLakh}
+                                />
+                            ))}
                         </div>
                     </div>
                 </section>
 
-                 {/* Focus Areas Section */}
+                {/* Focus Areas Section */}
                 <section className="py-20 bg-gray-50">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Our Focus Areas</h2>

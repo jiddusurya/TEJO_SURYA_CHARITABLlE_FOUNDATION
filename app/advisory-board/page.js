@@ -1,7 +1,7 @@
 "use client";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-// Helper component for Icons using inline SVGs
+// Reusable Icon Component
 const Icon = ({ name, className }) => {
   const icons = {
     users: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
@@ -46,68 +46,31 @@ const HelpTopicCard = ({ icon, title, children, color }) => {
 
 // Main Page Component
 export default function AdvisoryBoardPage() {
+    const [boardMembers, setBoardMembers] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-  const boardMembers = [
-    {
-      imgSrc: "https://placehold.co/128x128/E0E7FF/4338CA?text=PS",
-      name: "Dr. Priya Sharma",
-      title: "Senior Advisor - Medical Affairs",
-      role: "Gynecologist, MD, DGO",
-      description: "Leading gynecologist with 15+ years of experience in clinical practice and reproductive medicine. Advocates for menstrual health awareness in rural communities."
-    },
-    {
-      imgSrc: "https://placehold.co/128x128/DBEAFE/1E40AF?text=RK",
-      name: "Prof. Rajesh Kumar",
-      title: "Education Policy Advisor",
-      role: "PhD Education",
-      description: "Former education secretary with expertise in implementing large-scale health programs in schools across South India."
-    },
-    {
-      imgSrc: "https://placehold.co/128x128/E0F2FE/0891B2?text=LD",
-      name: "Ms. Lakshmi Devi",
-      title: "Women's Rights Advocate",
-      role: "MA Social Work",
-      description: "Renowned activist and author working for women's empowerment and menstrual equity across India."
-    }
-  ];
+    useEffect(() => {
+        const fetchBoardMembers = async () => {
+            try {
+                const res = await fetch('/api/advisory-board');
+                const data = await res.json();
+                setBoardMembers(data);
+            } catch (error) {
+                console.error("Failed to fetch advisory board members:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchBoardMembers();
+    }, []);
 
   const helpTopics = [
-    {
-      icon: 'target',
-      title: 'Strategic Guidance',
-      color: 'red',
-      description: 'Provide strategic direction and long-term vision for our programs and initiatives.'
-    },
-    {
-      icon: 'atom',
-      title: 'Expert Knowledge',
-      color: 'blue',
-      description: 'Share specialized knowledge in healthcare, education, and social development.'
-    },
-    {
-      icon: 'handshake',
-      title: 'Network & Partnerships',
-      color: 'yellow',
-      description: 'Leverage their networks to create new partnerships and funding opportunities.'
-    },
-    {
-      icon: 'clipboardCheck',
-      title: 'Program Review',
-      color: 'blue',
-      description: 'Review and evaluate our programs to ensure effectiveness and impact.'
-    },
-    {
-      icon: 'gavel',
-      title: 'Policy Advocacy',
-      color: 'red',
-      description: 'Advocate for policy changes that support menstrual health awareness.'
-    },
-    {
-      icon: 'badgeCheck',
-      title: 'Quality Assurance',
-      color: 'green',
-      description: 'Ensure our programs meet the highest standards of quality and ethics.'
-    }
+    { icon: 'target', title: 'Strategic Guidance', color: 'red', description: 'Provide strategic direction and long-term vision for our programs and initiatives.' },
+    { icon: 'atom', title: 'Expert Knowledge', color: 'blue', description: 'Share specialized knowledge in healthcare, education, and social development.' },
+    { icon: 'handshake', title: 'Network & Partnerships', color: 'yellow', description: 'Leverage their networks to create new partnerships and funding opportunities.' },
+    { icon: 'clipboardCheck', title: 'Program Review', color: 'blue', description: 'Review and evaluate our programs to ensure effectiveness and impact.' },
+    { icon: 'gavel', title: 'Policy Advocacy', color: 'red', description: 'Advocate for policy changes that support menstrual health awareness.' },
+    { icon: 'badgeCheck', title: 'Quality Assurance', color: 'green', description: 'Ensure our programs meet the highest standards of quality and ethics.' }
   ];
 
   return (
@@ -129,11 +92,13 @@ export default function AdvisoryBoardPage() {
         {/* Board Members Section */}
         <section className="pb-20 bg-white">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {boardMembers.map((member) => (
-                        <AdvisoryBoardMemberCard key={member.name} {...member} />
-                    ))}
-                </div>
+                {isLoading ? <div className="text-center">Loading members...</div> : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {boardMembers.map((member) => (
+                            <AdvisoryBoardMemberCard key={member.id} {...member} />
+                        ))}
+                    </div>
+                )}
             </div>
         </section>
 

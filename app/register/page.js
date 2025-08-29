@@ -126,6 +126,15 @@ export default function JoinCommunityPage() {
                                             <p className="text-orange-100">Stay informed about our latest programs, research findings, and opportunities to get involved.</p>
                                         </div>
                                     </li>
+                                    <li className="flex items-start space-x-4">
+                                        <div className="flex-shrink-0 mt-1">
+                                            <Icon name="checkCircle" className="h-6 w-6" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-lg">Facilities Support & Health Metrics Tracking</h4>
+                                            <p className="text-orange-100">Gain access to essential resources and tools that help track impact, monitor health outcomes, and ensure meaningful change on the ground.</p>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
