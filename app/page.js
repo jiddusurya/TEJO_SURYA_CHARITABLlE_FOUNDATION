@@ -239,7 +239,7 @@ export default function HomePage() {
                             </div>
                         </div>
 
-                        <div className={`transition-all duration-500 ease-in-out overflow-hidden ${showOtherInitiatives ? 'max-h-screen mt-20 opacity-100' : 'max-h-0 mt-0 opacity-0'}`}>
+                        <div className={`transition-all duration-500 ease-in-out  ${showOtherInitiatives ? 'max-h-screen mt-20 opacity-100 overflow-y-scroll' : 'max-h-0 mt-0 opacity-0 overflow-hidden'}`}>
                             <div className="text-center">
                                 <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Our Other Initiatives</h2>
                                 <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

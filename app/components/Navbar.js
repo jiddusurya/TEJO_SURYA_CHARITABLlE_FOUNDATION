@@ -75,7 +75,6 @@ export default function Navbar() {
       ]
     },
     { label: 'Gallery', href: '/gallery' },
-    { label: 'Register', href: '/register' },
   ];
 
   return (
