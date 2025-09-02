@@ -58,7 +58,7 @@ export default function Navbar() {
         { label: 'Vision & Mission', href: '/vision-and-mission', icon: 'target' },
         { label: 'Core Team', href: '/core-team', icon: 'users' },
         { label: 'Advisory Board', href: '/advisory-board', icon: 'clipboard' },
-        { label: 'Mentorship Forums', href: '/mentorship-forums', icon: 'users' },
+        { label: 'Mentorship Committee', href: '/mentorship-committee', icon: 'users' },
       ]
     },
     {
@@ -86,7 +86,7 @@ export default function Navbar() {
             <a href="/" className="flex items-center space-x-2">
               <img src="/logo.png" alt="Tejo Surya Foundation Logo" className="h-10 w-10 rounded-full" />
               <span className="text-sm font-bold text-gray-800">
-                  <span className='text-xl font-bold text-[#ff712c]'>TEJO SURYA</span><br />
+                  <span className='text-xl font-bold text-[#e68541]'>TEJO SURYA</span><br />
                   <span className='text-xs font-medium text-[#073763]'>Charitable Foundation</span>
               </span>
             </a>
@@ -133,7 +133,7 @@ export default function Navbar() {
           {/* Desktop Donate Button */}
           <div className="hidden lg:flex items-center">
             <a href="/donate">
-              <button className="bg-red-500 text-white font-bold text-md px-5 py-2 rounded-lg shadow-md hover:bg-red-600 transition-all duration-300 transform hover:scale-105">
+              <button className="bg-[#e68541] text-white font-bold text-md px-5 py-2 rounded-lg shadow-md  transition-all duration-300 transform hover:scale-105">
                 Donate Now
               </button>
             </a>
@@ -190,7 +190,7 @@ export default function Navbar() {
             ))}
             <div className="pt-4">
                 <a href="/donate">
-                  <button className="w-full bg-red-500 text-white font-bold text-md px-5 py-3 rounded-lg shadow-md hover:bg-red-600 transition-all duration-300">
+                  <button className="w-full bg-[#e68541] text-white font-bold text-md px-5 py-3 rounded-lg shadow-md transition-all duration-300">
                     Donate Now
                   </button>
                 </a>

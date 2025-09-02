@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 // Reusable Icon Component
 const Icon = ({ name, className }) => {
     const icons = {
-        users: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+        users: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>,
         close: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>,
     };
     return icons[name] || null;
@@ -66,13 +66,13 @@ const StoriesCarousel = ({ stories, onReadMore }) => {
         : currentStory.content;
 
     return (
-        <div 
+        <div
             className="relative max-w-4xl mx-auto"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex flex-col md:flex-row items-center gap-8 p-8 transition-all duration-500 ease-in-out">
-                <img src={currentStory.imageUrl} alt={currentStory.title} className="w-48 h-48 rounded-full object-cover flex-shrink-0 border-4 border-white shadow-md" />
+                <img src={currentStory.imageUrl} alt={currentStory.title} className="w-48 h-48 rounded-xl object-cover flex-shrink-0 border-4 border-white shadow-md" />
                 <div className="text-center md:text-left">
                     <h2 className="text-2xl font-bold text-gray-800">{currentStory.title}</h2>
                     <p className="mt-2 text-gray-600 text-sm whitespace-pre-wrap">{truncatedContent}</p>
@@ -81,7 +81,7 @@ const StoriesCarousel = ({ stories, onReadMore }) => {
                     </button>
                 </div>
             </div>
-            
+
             {/* Navigation Dots */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
                 {stories.map((_, index) => (
@@ -122,13 +122,14 @@ export default function ImpactStoriesPage() {
             <main>
                 <section className="py-20 text-center bg-white">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="inline-block p-4 bg-orange-100 rounded-full mb-6 shadow-sm">
-                            <Icon name="users" className="h-10 w-10 text-orange-500" />
+                        <div className='flex items-center justify-center'>
+                            <div className="inline-block p-4 bg-orange-100 rounded-full mx-3 shadow-sm">
+                                <Icon name="users" className="h-10 w-10 text-orange-500" />
+                            </div>
+                            <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Impact Stories</h1>
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Impact Stories</h1>
                         <p className="mt-4 max-w-3xl mx-auto text-gray-600 text-lg">
-                            Real stories from the communities we serve. These are the faces and voices behind our mission.
-                        </p>
+                            Here are faces and voices behind our mission through Real Stories from the communities we serve.                        </p>
                     </div>
                 </section>
 
@@ -136,8 +137,35 @@ export default function ImpactStoriesPage() {
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                         {isLoading ? (
                             <div className="text-center text-gray-500">Loading stories...</div>
+                        ) : stories.length === 0 ? (
+                            <div className="text-center text-gray-400">Impact stories coming soon...</div>
                         ) : (
-                            <StoriesCarousel stories={stories} onReadMore={setSelectedStory} />
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+                                {stories.map((story) => (
+                                    <div
+                                        key={story.id}
+                                        className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex items-center gap-4 p-6"
+                                    >
+                                        <img
+                                            src={story.imageUrl}
+                                            alt={story.title}
+                                            className="w-full h-48 object-cover rounded-lg border-4 border-white shadow-md"
+                                        />
+                                        <div className="text-center">
+                                            <h2 className="text-2xl font-bold text-gray-800">{story.title}</h2>
+                                            <p className="mt-2 text-gray-600 text-sm whitespace-pre-wrap">
+                                                {story.content.length > 150 ? story.content.substring(0, 150) + '...' : story.content}
+                                            </p>
+                                            <button
+                                                onClick={() => setSelectedStory(story)}
+                                                className="mt-4 text-red-500 font-semibold hover:text-red-600"
+                                            >
+                                                Read More
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         )}
                     </div>
                 </section>

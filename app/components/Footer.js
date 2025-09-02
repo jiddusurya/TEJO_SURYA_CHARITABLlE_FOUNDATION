@@ -22,7 +22,7 @@ export default function Footer() {
                     <div className="md:col-span-2 lg:col-span-1">
                         <Link href="#" className="flex items-center space-x-2 mb-4">
                             <img src="/logo.png" alt="Tejo Surya Foundation Logo" className="h-10 w-10 rounded-full" />
-                            <span className="text-sm font-bold text-white"><span className='text-2xl font-bold text-[#ff712c]'>TEJO SURYA</span><br /><span className='text-md font-medium text-[#084a88]'>Charitable Foundation</span></span>
+                            <span className="text-sm font-bold text-white"><span className='text-2xl font-bold text-[#ff712c]'>TEJO SURYA</span><br /><span className='text-md font-medium text-white'>Charitable Foundation</span></span>
                         </Link>
                         <p className="text-gray-400 text-sm">Strong Women ! <br /> Stronger Tomorrow !</p>
                         <div className="flex space-x-4 mt-6">

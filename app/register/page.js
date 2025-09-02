@@ -29,13 +29,13 @@ const CertificationCard = ({ icon, title, description }) => (
 export default function JoinCommunityPage() {
 
     const certifications = [
-    { icon: 'award', title: "FCRA Certified", description: "Foreign Contribution Regulation Act" },
-    { icon: 'checkCircle', title: "ISO Certified", description: "International Standards" },
-    { icon: 'globe', title: "NRI Support", description: "Global Community" },
-    { icon: 'heart', title: "5000+ Lives", description: "Impacted & Empowered" },
-    { icon: 'checkCircle', title: "12 AA Certified", description: "Certified for donations in India" },
-    { icon: 'checkCircle', title: "80 G Certified", description: "Donors can claim tax exemptions" },
-    { icon: 'award', title: "CSR 1 Certified", description: "Companies & Organizations can donate through CSR" }
+        { icon: 'award', title: "FCRA Certified", description: "Foreign Contribution Regulation Act" },
+        { icon: 'checkCircle', title: "ISO Certified", description: "International Standards" },
+        { icon: 'globe', title: "NRI Support", description: "Global Community" },
+        { icon: 'heart', title: "5000+ Lives", description: "Impacted & Empowered" },
+        { icon: 'checkCircle', title: "12 AA Certified", description: "Certified for donations in India" },
+        { icon: 'checkCircle', title: "80 G Certified", description: "Donors can claim tax exemptions" },
+        { icon: 'award', title: "CSR 1 Certified", description: "Companies & Organizations can donate through CSR" }
     ];
 
     return (
@@ -44,10 +44,12 @@ export default function JoinCommunityPage() {
                 {/* Join Our Community Section */}
                 <section className="py-20 text-center bg-white">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="inline-block p-4 bg-orange-100 rounded-full mb-6 shadow-sm">
-                            <Icon name="userPlus" className="h-10 w-10 text-orange-500" />
+                        <div className='flex items-center justify-center'>
+                            <div className="inline-block p-4 bg-orange-100 rounded-full mx-3 shadow-sm">
+                                <Icon name="userPlus" className="h-10 w-10 text-orange-500" />
+                            </div>
+                            <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Register Your School</h1>
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Register Your School</h1>
                         <p className="mt-4 max-w-3xl mx-auto text-gray-600 text-lg">
                             Register now to access our menstrual health curriculum, support resources, and join thousands of hearts working to uplift young girls through awareness and dignity.
                         </p>
@@ -94,7 +96,7 @@ export default function JoinCommunityPage() {
                         </form>
                     </div> */}
                             <div className="bg-white p-8 md:p-10 rounded-2xl shadow-2xl border border-gray-200">
-                                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfFjeaxdnOh-8OTLKLV7VTRa9g7ixPxhoWIuuw_H7qsM_77Dw/viewform?embedded=true" className='w-full'  height="700" frameBorder="0" marginHeight="0" marginWidth="0">Loading…</iframe>
+                                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfFjeaxdnOh-8OTLKLV7VTRa9g7ixPxhoWIuuw_H7qsM_77Dw/viewform?embedded=true" className='w-full' height="700" frameBorder="0" marginHeight="0" marginWidth="0">Loading…</iframe>
                             </div>
 
                             {/* Why Join Us? Info */}

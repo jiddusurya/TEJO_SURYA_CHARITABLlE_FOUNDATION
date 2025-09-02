@@ -25,12 +25,14 @@ const PartnershipCard = ({ icon, title, description, color }) => {
   };
 
   return (
-    <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 text-center hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-      <div className={`inline-flex items-center justify-center rounded-full h-16 w-16 mb-4 ${colorClasses[color]}`}>
+    <div className="flex items-center justify-center bg-white p-8 rounded-2xl shadow-lg border border-gray-100 text-center hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+      <div className={`inline-flex items-center justify-center rounded-full h-16 w-16 mb-4 p-3 ${colorClasses[color]}`}>
         <Icon name={icon} className="h-8 w-8" />
       </div>
-      <h3 className="text-xl font-semibold text-gray-800 mt-4">{title}</h3>
-      <p className="text-gray-600 mt-2">{description}</p>
+      <div>
+        <h3 className="text-xl font-semibold text-gray-800 mt-4">{title}</h3>
+        <p className="text-gray-600 mt-2">{description}</p>
+      </div>
     </div>
   );
 };
@@ -92,10 +94,12 @@ export default function CollaboratePage() {
         {/* Collaborate With Us Section */}
         <section className="py-15 text-center bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="inline-block p-4 bg-orange-100 rounded-full mb-6 shadow-sm">
-              <Icon name="handshake" className="h-10 w-10 text-orange-500" />
+            <div className='flex items-center justify-center'>
+              <div className="inline-block p-4 bg-orange-100 rounded-full mx-3 shadow-sm">
+                <Icon name="handshake" className="h-10 w-10 text-orange-500" />
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Collaborate With Us</h1>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Collaborate With Us</h1>
             <p className="mt-4 max-w-3xl mx-auto text-gray-600 text-lg">
               Partner with Tejo Surya Foundation to create meaningful impact in menstrual health education and women's empowerment across South India.
             </p>
@@ -103,7 +107,7 @@ export default function CollaboratePage() {
         </section>
 
         {/* Partnership Opportunities Section */}
-        <section className="py-15 bg-amber-50">
+        <section className="py-10 bg-amber-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Partnership Opportunities</h2>
@@ -116,12 +120,14 @@ export default function CollaboratePage() {
                 <PartnershipCard key={option.title} {...option} />
               ))}
             </div>
-            <button
-              onClick={handleJoinClick}
-              className="bg-orange-500 text-white font-bold px-8 py-3 rounded-lg shadow-lg hover:bg-orange-600 transition-colors sticky bottom-2 left-[45vw]"
-            >
-              Join Us Now
-            </button>
+            <div className="sticky bottom-4 z-50 flex justify-center mt-8">
+              <button
+                onClick={handleJoinClick}
+                className="bg-orange-500 text-white font-bold px-8 py-3 rounded-lg shadow-lg hover:bg-orange-600 transition-colors"
+              >
+                Join Us Now
+              </button>
+            </div>
           </div>
         </section>
 

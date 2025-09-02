@@ -12,26 +12,26 @@ const Icon = ({ name, className }) => {
 };
 
 // Report Card Component
-const ReportCard = ({ year, title, description, onViewReport,fileId }) => (
+const ReportCard = ({ year, title, description, onViewReport, fileId }) => (
   <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
     <div className="bg-amber-400 p-6 text-center text-white">
-        <div className="inline-block p-3 bg-white/20 rounded-full mb-2">
-            <Icon name="fileText" className="h-6 w-6" />
-        </div>
-        <h2 className="text-2xl font-bold">{year}</h2>
-        <p className="font-semibold">{title}</p>
+      <div className="inline-block p-3 bg-white/20 rounded-full mb-2">
+        <Icon name="fileText" className="h-6 w-6" />
+      </div>
+      <h2 className="text-2xl font-bold">{year}</h2>
+      <p className="font-semibold">{title}</p>
     </div>
     <div className="p-8 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold text-gray-800">Annual Report FY {year}</h3>
-        <p className="text-gray-600 mt-2 text-sm flex-grow">{description}</p>
-        <div className="mt-6">
-          <a target='_blank' rel='noopener noreferrer' href={fileId}>
-            <button onClick={onViewReport} className="w-full bg-white text-gray-700 font-semibold px-6 py-3 rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors flex items-center justify-center">
-                <Icon name="eye" className="h-5 w-5 mr-2" />
-                View Report
-            </button>
-          </a>
-        </div>
+      <h3 className="text-xl font-bold text-gray-800">Annual Report FY {year}</h3>
+      <p className="text-gray-600 mt-2 text-sm flex-grow">{description}</p>
+      <div className="mt-6">
+        <a target='_blank' rel='noopener noreferrer' href={fileId}>
+          <button onClick={onViewReport} className="w-full bg-white text-gray-700 font-semibold px-6 py-3 rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors flex items-center justify-center">
+            <Icon name="eye" className="h-5 w-5 mr-2" />
+            View Report
+          </button>
+        </a>
+      </div>
     </div>
   </div>
 );
@@ -61,30 +61,32 @@ export default function AnnualReportsPage() {
     <div className="bg-white font-sans">
       <main>
         <section className="py-20 text-center bg-white">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="inline-block p-4 bg-orange-100 rounded-full mb-6 shadow-sm">
-                    <Icon name="fileText" className="h-10 w-10 text-orange-500" />
-                </div>
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Annual Reports</h1>
-                <p className="mt-4 max-w-3xl mx-auto text-gray-600 text-lg">
-                    Explore our comprehensive annual reports showcasing our impact and financial transparency.
-                </p>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className='flex items-center justify-center'>
+              <div className="inline-block p-4 bg-orange-100 rounded-full mx-3 shadow-sm">
+                <Icon name="fileText" className="h-10 w-10 text-orange-500" />
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Annual Reports</h1>
             </div>
+            <p className="mt-4 max-w-3xl mx-auto text-gray-600 text-lg">
+              Explore our comprehensive annual reports showcasing our impact and financial transparency.
+            </p>
+          </div>
         </section>
 
         <section className="py-20 bg-amber-50">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                {isLoading ? <div className="text-center">Loading reports...</div> : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {reports.map((report) => (
-                            <ReportCard 
-                                key={report.id} 
-                                {...report} 
-                            />
-                        ))}
-                    </div>
-                )}
-            </div>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            {isLoading ? <div className="text-center">Loading reports...</div> : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {reports.map((report) => (
+                  <ReportCard
+                    key={report.id}
+                    {...report}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         </section>
       </main>
 

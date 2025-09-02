@@ -25,18 +25,18 @@ const Carousel = ({ images, isInstagram = false }) => {
   if (!images || images.length < itemsPerView) {
     // Handle cases with fewer images than itemsPerView
     return (
-        <div className="flex justify-center gap-4">
-            {images.map(post => (
-                 <div key={post.id} className="w-1/3 flex-shrink-0 px-2">
-                    <a href={isInstagram ? post.postUrl : undefined} target={isInstagram ? "_blank" : undefined} rel={isInstagram ? "noopener noreferrer" : undefined} className="group block rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 relative">
-                        <img src={post.src} alt={post.caption} className="w-full h-auto object-cover aspect-square" />
-                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                        <p className="text-white text-sm">{post.caption}</p>
-                        </div>
-                    </a>
-                </div>
-            ))}
-        </div>
+      <div className="flex justify-center gap-4">
+        {images.map(post => (
+          <div key={post.id} className="w-1/3 flex-shrink-0 px-2">
+            <a href={isInstagram ? post.postUrl : undefined} target={isInstagram ? "_blank" : undefined} rel={isInstagram ? "noopener noreferrer" : undefined} className="group block rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 relative">
+              <img src={post.src} alt={post.caption} className="w-full h-auto object-cover aspect-square" />
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <p className="text-white text-sm">{post.caption}</p>
+              </div>
+            </a>
+          </div>
+        ))}
+      </div>
     );
   }
 
@@ -44,7 +44,7 @@ const Carousel = ({ images, isInstagram = false }) => {
     ...images.slice(images.length - itemsPerView),
     ...images,
     ...images.slice(0, itemsPerView)
-  ].map((img, index) => ({...img, uniqueKey: `${img.id}-${index}`}));
+  ].map((img, index) => ({ ...img, uniqueKey: `${img.id}-${index}` }));
 
   useEffect(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -62,7 +62,7 @@ const Carousel = ({ images, isInstagram = false }) => {
       setCurrentIndex(1);
     }
   };
-  
+
   useEffect(() => {
     if (!isTransitioning) {
       setTimeout(() => setIsTransitioning(true), 50);
@@ -95,7 +95,7 @@ const Carousel = ({ images, isInstagram = false }) => {
           ))}
         </div>
       </div>
-       <button onClick={goToPrevious} className="absolute top-1/2 -left-4 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md z-10">
+      <button onClick={goToPrevious} className="absolute top-1/2 -left-4 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md z-10">
         <Icon name="chevronLeft" className="h-6 w-6 text-gray-700" />
       </button>
       <button onClick={goToNext} className="absolute top-1/2 -right-4 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md z-10">
@@ -107,14 +107,14 @@ const Carousel = ({ images, isInstagram = false }) => {
 
 // Helper to extract YouTube video ID
 const getYouTubeEmbedUrl = (url) => {
-    let videoId = '';
-    const urlObj = new URL(url);
-    if (urlObj.hostname === 'youtu.be') {
-        videoId = urlObj.pathname.slice(1);
-    } else if (urlObj.hostname.includes('youtube.com')) {
-        videoId = urlObj.searchParams.get('v');
-    }
-    return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+  let videoId = '';
+  const urlObj = new URL(url);
+  if (urlObj.hostname === 'youtu.be') {
+    videoId = urlObj.pathname.slice(1);
+  } else if (urlObj.hostname.includes('youtube.com')) {
+    videoId = urlObj.searchParams.get('v');
+  }
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
 };
 
 // Main Page Component
@@ -154,10 +154,12 @@ export default function GalleryPage() {
         {/* Our Gallery Section */}
         <section className="py-20 text-center bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="inline-block p-4 bg-orange-100 rounded-full mb-6 shadow-sm">
-              <Icon name="camera" className="h-10 w-10 text-orange-500" />
+            <div className='flex items-center justify-center'>
+              <div className="inline-block p-4 bg-orange-100 rounded-full mx-3 shadow-sm">
+                <Icon name="camera" className="h-10 w-10 text-orange-500" />
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Our Gallery</h1>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Our Gallery</h1>
             <p className="mt-4 max-w-3xl mx-auto text-gray-600 text-lg">
               A collection of moments, stories, and milestones from our journey.
             </p>
@@ -175,10 +177,12 @@ export default function GalleryPage() {
         <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <div className="inline-block p-3 bg-red-100 rounded-full mb-4">
-                <Icon name="instagram" className="h-8 w-8 text-red-500" />
+              <div className='flex items-center justify-center'>
+                <div className="inline-block p-3 bg-red-100 rounded-full mx-3">
+                  <Icon name="instagram" className="h-8 w-8 text-red-500" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Follow Our Journey</h2>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Follow Our Journey</h2>
               <p className="mt-4 max-w-2xl mx-auto text-gray-600">
                 Glimpses from our work, updated regularly from our Instagram feed.
               </p>
@@ -200,28 +204,30 @@ export default function GalleryPage() {
         {/* Video Testimonials Section */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-             <div className="inline-block p-3 bg-red-100 rounded-full mb-4">
+            <div className='flex items-center justify-center'>
+              <div className="inline-block p-3 bg-red-100 rounded-full mx-3">
                 <Icon name="video" className="h-8 w-8 text-red-500" />
               </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Video Testimonials</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Video Testimonials</h2>
+            </div>
             <p className="mt-4 max-w-2xl mx-auto text-gray-600">
               Watch powerful stories shared by our beneficiaries and partners.
             </p>
             <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
               {isLoading ? <p>Loading videos...</p> : videos.length > 0 ? videos.map(video => (
                 <div key={video.id} className="bg-gray-50 p-4 rounded-lg shadow-md">
-                    <div className="aspect-w-16 aspect-h-9 mb-4">
-                        <iframe
-                            src={getYouTubeEmbedUrl(video.youtubeUrl)}
-                            title={video.title}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            className="w-full h-full rounded-lg"
-                        ></iframe>
-                    </div>
-                    <h3 className="font-bold text-lg">{video.title}</h3>
-                    <p className="text-gray-600 text-sm">{video.description}</p>
+                  <div className="aspect-w-16 aspect-h-9 mb-4">
+                    <iframe
+                      src={getYouTubeEmbedUrl(video.youtubeUrl)}
+                      title={video.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full rounded-lg"
+                    ></iframe>
+                  </div>
+                  <h3 className="font-bold text-lg">{video.title}</h3>
+                  <p className="text-gray-600 text-sm">{video.description}</p>
                 </div>
               )) : <p className="col-span-2 text-gray-500">Video testimonials coming soon...</p>}
             </div>
@@ -231,23 +237,25 @@ export default function GalleryPage() {
         {/* In The News Section */}
         <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="inline-block p-3 bg-blue-100 rounded-full mb-4">
+            <div className="flex items-center justify-center">
+              <div className="inline-block p-3 bg-blue-100 rounded-full mx-3">
                 <Icon name="news" className="h-8 w-8 text-blue-500" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800">In The News</h2>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">In The News</h2>
             <p className="mt-4 max-w-2xl mx-auto text-gray-600">
               Media coverage of our work and initiatives.
             </p>
             <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-               {isLoading ? <p>Loading articles...</p> : articles.length > 0 ? articles.map(article => (
+              {isLoading ? <p>Loading articles...</p> : articles.length > 0 ? articles.map(article => (
                 <a key={article.id} href={article.articleUrl} target="_blank" rel="noopener noreferrer" className="block bg-white rounded-lg shadow-md overflow-hidden group">
-                    <img src={article.imageUrl} alt={article.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"/>
-                    <div className="p-4">
-                        <h3 className="font-bold text-lg">{article.title}</h3>
-                        <p className="text-gray-500 text-sm mt-1">{article.source}</p>
-                    </div>
+                  <img src={article.imageUrl} alt={article.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <div className="p-4">
+                    <h3 className="font-bold text-lg">{article.title}</h3>
+                    <p className="text-gray-500 text-sm mt-1">{article.source}</p>
+                  </div>
                 </a>
-               )) : <p className="col-span-3 text-gray-500">News features coming soon...</p>}
+              )) : <p className="col-span-3 text-gray-500">News features coming soon...</p>}
             </div>
           </div>
         </section>
