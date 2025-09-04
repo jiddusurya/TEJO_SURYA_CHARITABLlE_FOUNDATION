@@ -49,7 +49,7 @@ const AdvisoryBoardMemberCard = ({ member, onReadMore }) => {
         <div className="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 text-center h-full flex flex-col hover:shadow-xl transition-shadow duration-300">
             <img src={member.imgSrc} alt={member.name} className="w-64 h-64 md:w-32 md:h-32 rounded-full mx-auto mb-4 md:mb-6 border-4 border-white shadow-md" />
             <h3 className="text-xl md:text-2xl font-bold text-gray-800">{member.name}</h3>
-            {member.title.split(",").map((role, index) => (
+            {member.role.split(",").map((role, index) => (
                 <p key={index} className="text-blue-600 font-semibold mt-1">{role}</p>
             ))}
             <p className="text-gray-600 text-sm mt-1">{member.title}</p>
