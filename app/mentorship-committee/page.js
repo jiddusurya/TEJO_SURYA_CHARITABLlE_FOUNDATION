@@ -128,7 +128,6 @@ export default function MentorshipCommitteePage() {
                 </div>
               </div>
               <div>
-                <img src="https://res.cloudinary.com/dqwcr4y98/image/upload/v1756445531/Students_session_2_gfw7bk.jpg" alt="Mentorship Session" className="rounded-2xl shadow-xl w-full" />
               </div>
             </div>
           </div>

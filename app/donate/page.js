@@ -417,7 +417,6 @@ export default function SupportPage() {
     ];
     const nriSupport = [
         { country: "USA", icon: "usa", description: "Supporting 50+ girls monthly" },
-        { country: "UK", icon: "uk", description: "Funding education programs" },
         { country: "Australia", icon: "australia", description: "Sponsoring hygiene kits" }
     ];
 
