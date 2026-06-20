@@ -327,7 +327,7 @@ export default function MissionAndVisionPage() {
                                 <Icon name="heart" className="h-5 w-5 mr-2" />
                                 Support Our Mission
                             </Link>
-                            <Link href={"/core-team"} className="bg-transparent border-2 border-white text-white font-bold px-8 py-3 rounded-lg shadow-lg hover:bg-white hover:text-rose-700 transition-colors flex items-center w-full sm:w-auto justify-center">
+                            <Link href={"/our-team"} className="bg-transparent border-2 border-white text-white font-bold px-8 py-3 rounded-lg shadow-lg hover:bg-white hover:text-rose-700 transition-colors flex items-center w-full sm:w-auto justify-center">
                                 <Icon name="users" className="h-5 w-5 mr-2" />
                                 Meet Our Team
                             </Link>
