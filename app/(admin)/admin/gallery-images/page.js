@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import ReorderableList from '../components/ReorderableList';
 
 export default function ManageGalleryImages() {
     const [images, setImages] = useState([]);
@@ -11,6 +12,17 @@ export default function ManageGalleryImages() {
     const fetchData = async () => {
         const res = await fetch('/api/gallery-images');
         setImages(await res.json());
+    };
+
+    const saveOrder = async (items) => {
+        await Promise.all(items.map((image, index) => (
+            fetch(`/api/admin/gallery-images/${image.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...image, sortOrder: index }),
+            })
+        )));
+        fetchData();
     };
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -54,18 +66,24 @@ export default function ManageGalleryImages() {
                         {editing && <button type="button" onClick={resetForm} className="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>}
                     </div>
                 </form>
-                <div className="space-y-2">
-                    {images.map(image => (
-                        <div key={image.id} className="flex items-center justify-between p-2 border rounded">
-                            <img src={image.src} alt={image.caption} className="w-16 h-16 object-cover rounded-md mr-4"/>
-                            <span className="flex-grow">{image.caption}</span>
+                <ReorderableList
+                    items={images}
+                    setItems={setImages}
+                    onSaveOrder={saveOrder}
+                    renderItem={(image, index, { dragProps, isDragging }) => (
+                        <div key={image.id} {...dragProps} className={`flex items-center justify-between rounded border p-2 ${isDragging ? 'ring-2 ring-blue-300' : ''}`}>
+                            <div className="flex items-center gap-3">
+                                <span className="cursor-grab text-gray-400">⋮⋮</span>
+                                <img src={image.src} alt={image.caption} className="mr-4 h-16 w-16 rounded-md object-cover"/>
+                                <span className="flex-grow">{image.caption}</span>
+                            </div>
                             <div className="flex gap-2">
                                 <button onClick={() => editImage(image)} className="text-sm bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
                                 <button onClick={() => deleteImage(image.id)} className="text-sm bg-red-500 text-white px-3 py-1 rounded">Delete</button>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    )}
+                />
             </div>
         </div>
     );

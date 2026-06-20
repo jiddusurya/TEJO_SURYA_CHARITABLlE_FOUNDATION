@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const values = await prisma.coreValue.findMany({
       where: { isVisible: true },
-      orderBy: { createdAt: 'asc' }
+      orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }]
     });
     return NextResponse.json(values);
   } catch (error) {

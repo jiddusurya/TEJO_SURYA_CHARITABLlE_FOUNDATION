@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const impacts = await prisma.donationImpact.findMany({
       where: { isVisible: true },
-      orderBy: { amount: 'asc' }
+      orderBy: [{ sortOrder: 'asc' }, { amount: 'asc' }]
     });
     return NextResponse.json(impacts);
   } catch (error) {

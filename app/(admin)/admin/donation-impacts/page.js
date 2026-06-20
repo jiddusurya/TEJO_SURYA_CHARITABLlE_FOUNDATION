@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
+import ReorderableList from '../components/ReorderableList';
 
 export default function ManageDonationImpacts() {
   const [impacts, setImpacts] = useState([]);
@@ -13,6 +14,17 @@ export default function ManageDonationImpacts() {
   const fetchData = async () => {
     const res = await fetch('/api/admin/donation-impacts');
     setImpacts(await res.json());
+  };
+
+  const saveOrder = async (items) => {
+    await Promise.all(items.map((impact, index) => (
+      fetch(`/api/admin/donation-impacts/${impact.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...impact, sortOrder: index }),
+      })
+    )));
+    fetchData();
   };
 
   const handleChange = (e) => {
@@ -105,20 +117,26 @@ export default function ManageDonationImpacts() {
           </div>
         </form>
 
-        <div className="space-y-2">
-          {impacts.map((impact) => (
-            <div key={impact.id} className={`flex items-center justify-between p-3 border rounded ${impact.isVisible ? 'bg-white' : 'bg-gray-200'}`}>
-              <span className="flex-grow font-semibold">Rs {impact.amount}: {impact.title}</span>
+        <ReorderableList
+          items={impacts}
+          setItems={setImpacts}
+          onSaveOrder={saveOrder}
+          renderItem={(impact, index, { dragProps, isDragging }) => (
+            <div key={impact.id} {...dragProps} className={`flex items-center justify-between rounded border p-3 ${impact.isVisible ? 'bg-white' : 'bg-gray-200'} ${isDragging ? 'ring-2 ring-blue-300' : ''}`}>
+              <div className="flex items-center gap-3">
+                <span className="cursor-grab text-gray-400">⋮⋮</span>
+                <span className="flex-grow font-semibold">Rs {impact.amount}: {impact.title}</span>
+              </div>
               <span className={`text-sm font-bold px-2 py-1 rounded-full ${impact.isVisible ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                 {impact.isVisible ? 'Visible' : 'Hidden'}
               </span>
-              <div className="flex gap-2 ml-4">
+              <div className="ml-4 flex gap-2">
                 <button onClick={() => editImpact(impact)} className="text-sm bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
                 <button onClick={() => deleteImpact(impact.id)} className="text-sm bg-red-500 text-white px-3 py-1 rounded">Delete</button>
               </div>
             </div>
-          ))}
-        </div>
+          )}
+        />
       </div>
     </div>
   );

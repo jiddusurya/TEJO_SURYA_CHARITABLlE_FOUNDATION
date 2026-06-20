@@ -6,7 +6,7 @@ export async function GET() {
     // Only fetch members that are marked as visible
     const members = await prisma.advisoryBoardMember.findMany({
       where: { isVisible: true },
-      orderBy: { createdAt: 'asc' }
+      orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }]
     });
     return NextResponse.json(members);
   } catch (error) {

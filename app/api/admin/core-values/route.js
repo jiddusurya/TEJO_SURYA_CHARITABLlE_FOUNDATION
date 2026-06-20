@@ -3,7 +3,7 @@ import prisma from '../../../../lib/prisma';
 
 export async function GET() {
   try {
-    const values = await prisma.coreValue.findMany({ orderBy: { createdAt: 'asc' } });
+    const values = await prisma.coreValue.findMany({ orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }] });
     return NextResponse.json(values);
   } catch (error) {
     return new NextResponse('Internal Server Error', { status: 500 });

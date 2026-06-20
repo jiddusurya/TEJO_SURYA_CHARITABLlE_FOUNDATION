@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import ReorderableList from '../components/ReorderableList';
 
 export default function ManageImpactStories() {
     const [stories, setStories] = useState([]);
@@ -11,6 +12,17 @@ export default function ManageImpactStories() {
     const fetchData = async () => {
         const res = await fetch('/api/admin/impact-stories');
         setStories(await res.json());
+    };
+
+    const saveOrder = async (items) => {
+        await Promise.all(items.map((story, index) => (
+            fetch(`/api/admin/impact-stories/${story.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...story, sortOrder: index }),
+            })
+        )));
+        fetchData();
     };
 
     const handleChange = (e) => {
@@ -62,20 +74,26 @@ export default function ManageImpactStories() {
                         {editing && <button type="button" onClick={resetForm} className="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>}
                     </div>
                 </form>
-                <div className="space-y-2">
-                    {stories.map(story => (
-                        <div key={story.id} className="flex items-center justify-between p-2 border rounded">
-                           <span className="font-semibold">{story.title}</span>
+                <ReorderableList
+                    items={stories}
+                    setItems={setStories}
+                    onSaveOrder={saveOrder}
+                    renderItem={(story, index, { dragProps, isDragging }) => (
+                        <div key={story.id} {...dragProps} className={`flex items-center justify-between rounded border p-2 ${isDragging ? 'ring-2 ring-blue-300' : ''}`}>
+                           <div className="flex items-center gap-3">
+                               <span className="cursor-grab text-gray-400">⋮⋮</span>
+                               <span className="font-semibold">{story.title}</span>
+                           </div>
                            <span className={`text-sm font-medium px-2 py-1 rounded-full ${story.isVisible ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                                 {story.isVisible ? 'Visible' : 'Hidden'}
-                            </span>
+                           </span>
                             <div className="flex gap-2">
                                 <button onClick={() => editStory(story)} className="text-sm bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
                                 <button onClick={() => deleteStory(story.id)} className="text-sm bg-red-500 text-white px-3 py-1 rounded">Delete</button>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    )}
+                />
             </div>
         </div>
     );

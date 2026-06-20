@@ -3,7 +3,7 @@ import prisma from '../../../../lib/prisma';
 
 export async function GET() {
   try {
-    const impacts = await prisma.donationImpact.findMany({ orderBy: { amount: 'asc' } });
+    const impacts = await prisma.donationImpact.findMany({ orderBy: [{ sortOrder: 'asc' }, { amount: 'asc' }] });
     return NextResponse.json(impacts);
   } catch (error) {
     return new NextResponse('Internal Server Error', { status: 500 });

@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const stories = await prisma.impactStory.findMany({
       where: { isVisible: true },
-      orderBy: { createdAt: 'desc' }
+      orderBy: [{ sortOrder: 'asc' }, { createdAt: 'desc' }]
     });
     return NextResponse.json(stories);
   } catch (error) {

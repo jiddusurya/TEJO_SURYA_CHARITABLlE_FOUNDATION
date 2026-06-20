@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import ReorderableList from '../components/ReorderableList';
 
 export default function ManageGoalStats() {
     const [goals, setGoals] = useState([]);
@@ -11,6 +12,17 @@ export default function ManageGoalStats() {
     const fetchData = async () => {
         const res = await fetch('/api/goal-stats');
         setGoals(await res.json());
+    };
+
+    const saveOrder = async (items) => {
+        await Promise.all(items.map((goal, index) => (
+            fetch(`/api/admin/goal-stats/${goal.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...goal, sortOrder: index }),
+            })
+        )));
+        fetchData();
     };
 
     const handleChange = (e) => {
@@ -63,17 +75,23 @@ export default function ManageGoalStats() {
                         {editing && <button type="button" onClick={resetForm} className="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>}
                     </div>
                 </form>
-                <div className="space-y-2">
-                    {goals.map(goal => (
-                        <div key={goal.id} className="flex items-center justify-between p-2 border rounded">
-                           <span className="flex-grow font-semibold">{goal.label}: {goal.count}</span>
+                <ReorderableList
+                    items={goals}
+                    setItems={setGoals}
+                    onSaveOrder={saveOrder}
+                    renderItem={(goal, index, { dragProps, isDragging }) => (
+                        <div key={goal.id} {...dragProps} className={`flex items-center justify-between rounded border p-2 ${isDragging ? 'ring-2 ring-blue-300' : ''}`}>
+                           <div className="flex items-center gap-3">
+                               <span className="cursor-grab text-gray-400">⋮⋮</span>
+                               <span className="flex-grow font-semibold">{goal.label}: {goal.count}</span>
+                           </div>
                             <div className="flex gap-2">
                                 <button onClick={() => editGoal(goal)} className="text-sm bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
                                 <button onClick={() => deleteGoal(goal.id)} className="text-sm bg-red-500 text-white px-3 py-1 rounded">Delete</button>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    )}
+                />
             </div>
         </div>
     );

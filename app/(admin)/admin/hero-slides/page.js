@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import ReorderableList from '../components/ReorderableList';
 
 export default function ManageHeroSlides() {
     const [heroSlides, setHeroSlides] = useState([]);
@@ -13,6 +14,17 @@ export default function ManageHeroSlides() {
     const fetchData = async () => {
         const res = await fetch('/api/hero-slides');
         setHeroSlides(await res.json());
+    };
+
+    const saveOrder = async (items) => {
+        await Promise.all(items.map((slide, index) => (
+            fetch(`/api/admin/hero-slides/${slide.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...slide, sortOrder: index }),
+            })
+        )));
+        fetchData();
     };
 
     const handleSlideChange = (e) => {
@@ -63,17 +75,23 @@ export default function ManageHeroSlides() {
                         {editingSlide && <button type="button" onClick={() => { setEditingSlide(null); setSlideForm({ imgSrc: '', title: '', subtitle: '', description: '' }); }} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Cancel</button>}
                     </div>
                 </form>
-                <div className="space-y-2">
-                    {heroSlides.map(slide => (
-                        <div key={slide.id} className="flex items-center justify-between p-2 border rounded">
-                            <span>{slide.title}</span>
+                <ReorderableList
+                    items={heroSlides}
+                    setItems={setHeroSlides}
+                    onSaveOrder={saveOrder}
+                    renderItem={(slide, index, { dragProps, isDragging }) => (
+                        <div key={slide.id} {...dragProps} className={`flex items-center justify-between rounded border p-2 ${isDragging ? 'bg-gray-100 ring-2 ring-blue-300' : ''}`}>
+                            <div className="flex items-center gap-3">
+                                <span className="cursor-grab text-gray-400">⋮⋮</span>
+                                <span>{slide.title}</span>
+                            </div>
                             <div className="flex gap-2">
                                 <button onClick={() => editSlide(slide)} className="text-sm bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
                                 <button onClick={() => deleteSlide(slide.id)} className="text-sm bg-red-500 text-white px-3 py-1 rounded">Delete</button>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    )}
+                />
             </div>
         </div>
     );

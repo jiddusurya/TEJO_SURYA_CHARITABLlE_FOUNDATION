@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import ReorderableList from '../components/ReorderableList';
 
 export default function ManageMentors() {
     const [mentors, setMentors] = useState([]);
@@ -11,6 +12,17 @@ export default function ManageMentors() {
     const fetchData = async () => {
         const res = await fetch('/api/admin/mentors');
         setMentors(await res.json());
+    };
+
+    const saveOrder = async (items) => {
+        await Promise.all(items.map((mentor, index) => (
+            fetch(`/api/admin/mentors/${mentor.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...mentor, sortOrder: index }),
+            })
+        )));
+        fetchData();
     };
 
     const handleChange = (e) => {
@@ -64,21 +76,27 @@ export default function ManageMentors() {
                         {editing && <button type="button" onClick={resetForm} className="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>}
                     </div>
                 </form>
-                <div className="space-y-2">
-                    {mentors.map(mentor => (
-                        <div key={mentor.id} className={`flex items-center justify-between p-2 border rounded ${mentor.isVisible ? 'bg-white' : 'bg-gray-200'}`}>
-                           <img src={mentor.imgSrc} alt={mentor.name} className="w-12 h-12 object-cover rounded-full mr-4"/>
-                           <span className="flex-grow font-semibold">{mentor.name}</span>
+                <ReorderableList
+                    items={mentors}
+                    setItems={setMentors}
+                    onSaveOrder={saveOrder}
+                    renderItem={(mentor, index, { dragProps, isDragging }) => (
+                        <div key={mentor.id} {...dragProps} className={`flex items-center justify-between rounded border p-2 ${mentor.isVisible ? 'bg-white' : 'bg-gray-200'} ${isDragging ? 'ring-2 ring-blue-300' : ''}`}>
+                           <div className="flex items-center">
+                               <span className="cursor-grab text-gray-400 mr-3">⋮⋮</span>
+                               <img src={mentor.imgSrc} alt={mentor.name} className="mr-4 h-12 w-12 rounded-full object-cover"/>
+                               <span className="flex-grow font-semibold">{mentor.name}</span>
+                           </div>
                            <span className={`text-sm font-bold px-2 py-1 rounded-full ${mentor.isVisible ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                                {mentor.isVisible ? 'Visible' : 'Hidden'}
                            </span>
-                            <div className="flex gap-2 ml-4">
+                            <div className="ml-4 flex gap-2">
                                 <button onClick={() => editMentor(mentor)} className="text-sm bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
                                 <button onClick={() => deleteMentor(mentor.id)} className="text-sm bg-red-500 text-white px-3 py-1 rounded">Delete</button>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    )}
+                />
             </div>
         </div>
     );

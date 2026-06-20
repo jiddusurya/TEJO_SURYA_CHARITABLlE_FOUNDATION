@@ -5,7 +5,7 @@ import prisma from '@/lib/prisma'; // Use the singleton instance
 export async function GET() {
   try {
     const slides = await prisma.heroSlide.findMany({
-      orderBy: { createdAt: 'asc' }
+      orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }]
     });
     return NextResponse.json(slides);
   } catch (error) {

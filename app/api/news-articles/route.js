@@ -3,7 +3,7 @@ import prisma from '@/lib/prisma'; // Use the singleton instance
 ;
 export async function GET() {
   try {
-    const articles = await prisma.newsArticle.findMany({ orderBy: { createdAt: 'desc' } });
+    const articles = await prisma.newsArticle.findMany({ orderBy: [{ sortOrder: 'asc' }, { createdAt: 'desc' }] });
     return NextResponse.json(articles);
   } catch (error) { return new NextResponse("Internal Server Error", { status: 500 }); }
 }

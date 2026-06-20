@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
+import ReorderableList from '../components/ReorderableList';
 
 export default function ManageCoreValues() {
   const [values, setValues] = useState([]);
@@ -13,6 +14,17 @@ export default function ManageCoreValues() {
   const fetchData = async () => {
     const res = await fetch('/api/admin/core-values');
     setValues(await res.json());
+  };
+
+  const saveOrder = async (items) => {
+    await Promise.all(items.map((value, index) => (
+      fetch(`/api/admin/core-values/${value.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...value, sortOrder: index }),
+      })
+    )));
+    fetchData();
   };
 
   const handleChange = (e) => {
@@ -113,21 +125,27 @@ export default function ManageCoreValues() {
           </div>
         </form>
 
-        <div className="space-y-2">
-          {values.map((value) => (
-            <div key={value.id} className={`flex items-center justify-between p-3 border rounded ${value.isVisible ? 'bg-white' : 'bg-gray-200'}`}>
-              <span className="flex-grow font-semibold">{value.title}</span>
-              <span className="text-sm text-gray-600 mr-4">{value.icon} • {value.color}</span>
+        <ReorderableList
+          items={values}
+          setItems={setValues}
+          onSaveOrder={saveOrder}
+          renderItem={(value, index, { dragProps, isDragging }) => (
+            <div key={value.id} {...dragProps} className={`flex items-center justify-between rounded border p-3 ${value.isVisible ? 'bg-white' : 'bg-gray-200'} ${isDragging ? 'ring-2 ring-blue-300' : ''}`}>
+              <div className="flex items-center gap-3">
+                <span className="cursor-grab text-gray-400">⋮⋮</span>
+                <span className="flex-grow font-semibold">{value.title}</span>
+              </div>
+              <span className="mr-4 text-sm text-gray-600">{value.icon} • {value.color}</span>
               <span className={`text-sm font-bold px-2 py-1 rounded-full ${value.isVisible ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                 {value.isVisible ? 'Visible' : 'Hidden'}
               </span>
-              <div className="flex gap-2 ml-4">
+              <div className="ml-4 flex gap-2">
                 <button onClick={() => editValue(value)} className="text-sm bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
                 <button onClick={() => deleteValue(value.id)} className="text-sm bg-red-500 text-white px-3 py-1 rounded">Delete</button>
               </div>
             </div>
-          ))}
-        </div>
+          )}
+        />
       </div>
     </div>
   );

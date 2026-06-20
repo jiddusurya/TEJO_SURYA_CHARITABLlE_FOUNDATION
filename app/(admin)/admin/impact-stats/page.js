@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import ReorderableList from '../components/ReorderableList';
 
 export default function ManageImpactStats() {
     const [impactStats, setImpactStats] = useState([]);
@@ -15,6 +16,17 @@ export default function ManageImpactStats() {
     const fetchData = async () => {
         const res = await fetch('/api/impact-stats');
         setImpactStats(await res.json());
+    };
+
+    const saveOrder = async (items) => {
+        await Promise.all(items.map((stat, index) => (
+            fetch(`/api/admin/impact-stats/${stat.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...stat, sortOrder: index }),
+            })
+        )));
+        fetchData();
     };
 
     const handleFormChange = (e) => {
@@ -71,17 +83,23 @@ export default function ManageImpactStats() {
                     </div>
                 </form>
 
-                <div className="space-y-2">
-                    {impactStats.map(stat => (
-                        <div key={stat.id} className="flex items-center justify-between p-2 border rounded">
-                            <span>{stat.label}: <span className="font-bold">{stat.count}</span></span>
+                <ReorderableList
+                    items={impactStats}
+                    setItems={setImpactStats}
+                    onSaveOrder={saveOrder}
+                    renderItem={(stat, index, { dragProps, isDragging }) => (
+                        <div key={stat.id} {...dragProps} className={`flex items-center justify-between rounded border p-2 ${isDragging ? 'ring-2 ring-blue-300' : ''}`}>
+                            <div className="flex items-center gap-3">
+                                <span className="cursor-grab text-gray-400">⋮⋮</span>
+                                <span>{stat.label}: <span className="font-bold">{stat.count}</span></span>
+                            </div>
                             <div className="flex gap-2">
                                 <button onClick={() => editStat(stat)} className="text-sm bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
                                 <button onClick={() => deleteStat(stat.id)} className="text-sm bg-red-500 text-white px-3 py-1 rounded">Delete</button>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    )}
+                />
             </div>
         </div>
     );
