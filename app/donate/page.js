@@ -324,15 +324,36 @@ const NriSupportCard = ({ country, icon, description }) => (
     </div>
 );
 
+const defaultImpactLevels = [
+    { amount: 500, title: "Provides hygiene kits for 2 girls", description: "Essential supplies for one month" },
+    { amount: 1500, title: "Sponsors health education session", description: "Reaches 50+ students" },
+    { amount: 50000, title: "Supports a full program", description: "For one school" }
+];
+
 
 export default function SupportPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [paymentSuccess, setPaymentSuccess] = useState(false);
     const [paymentId, setPaymentId] = useState('');
+    const [impactLevels, setImpactLevels] = useState(defaultImpactLevels);
 
     // Effect to dynamically load Razorpay script
     useEffect(() => {
+        const fetchDonationImpacts = async () => {
+            try {
+                const res = await fetch('/api/donation-impacts');
+                const data = await res.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    setImpactLevels(data);
+                }
+            } catch (error) {
+                console.error('Failed to fetch donation impact levels:', error);
+            }
+        };
+
+        fetchDonationImpacts();
+
         const script = document.createElement('script');
         script.src = 'https://checkout.razorpay.com/v1/checkout.js';
         script.async = true;
@@ -409,11 +430,6 @@ export default function SupportPage() {
         }
     };
 
-    const impactLevels = [
-        { amount: 500, title: "Provides hygiene kits for 2 girls", description: "Essential supplies for one month" },
-        { amount: 1500, title: "Sponsors health education session", description: "Reaches 50+ students" },
-        { amount: 50000, title: "Supports a full program", description: "For one school" }
-    ];
     const nriSupport = [
         { country: "USA", icon: "usa", description: "Supporting 50+ girls monthly" },
         { country: "Australia", icon: "australia", description: "Sponsoring hygiene kits" }
@@ -455,7 +471,7 @@ export default function SupportPage() {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {impactLevels.map((level) => (
-                                <DonationImpactCard key={level.amount} {...level} />
+                                <DonationImpactCard key={level.id || level.amount} {...level} />
                             ))}
                         </div>
                     </div>

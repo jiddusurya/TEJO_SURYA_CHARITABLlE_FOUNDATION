@@ -47,9 +47,19 @@ const ValueCard = ({ icon, title, children, color }) => {
   );
 };
 
+const defaultValues = [
+  { icon: 'heart', title: 'Compassion', color: 'blue', description: 'We approach every girl and woman with empathy, understanding their unique challenges and needs.' },
+  { icon: 'sparkle', title: 'Empowerment', color: 'orange', description: 'We believe in giving girls and women the knowledge and tools to make informed decisions about their health.' },
+  { icon: 'handshake', title: 'Inclusivity', color: 'yellow', description: 'Our programs are designed to reach every girl, regardless of her background or circumstances.' },
+  { icon: 'bookOpen', title: 'Education', color: 'red', description: 'Knowledge is power. We provide comprehensive and age-appropriate health education.' },
+  { icon: 'leaf', title: 'Sustainability', color: 'green', description: 'We build programs that create lasting change and can be maintained by communities themselves.' },
+  { icon: 'lightbulb', title: 'Innovation', color: 'amber', description: 'We continuously improve our approaches based on the latest research and community feedback.' }
+];
+
 // Main Page Component
 export default function CoreTeamPage() {
   const [teamMembers, setTeamMembers] = useState([]);
+  const [values, setValues] = useState(defaultValues);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -64,17 +74,22 @@ export default function CoreTeamPage() {
         setIsLoading(false);
       }
     };
-    fetchTeamMembers();
-  }, []);
 
-  const values = [
-    { icon: 'heart', title: 'Compassion', color: 'blue', description: 'We approach every girl and woman with empathy, understanding their unique challenges and needs.' },
-    { icon: 'sparkle', title: 'Empowerment', color: 'orange', description: 'We believe in giving girls and women the knowledge and tools to make informed decisions about their health.' },
-    { icon: 'handshake', title: 'Inclusivity', color: 'yellow', description: 'Our programs are designed to reach every girl, regardless of her background or circumstances.' },
-    { icon: 'bookOpen', title: 'Education', color: 'red', description: 'Knowledge is power. We provide comprehensive and age-appropriate health education.' },
-    { icon: 'leaf', title: 'Sustainability', color: 'green', description: 'We build programs that create lasting change and can be maintained by communities themselves.' },
-    { icon: 'lightbulb', title: 'Innovation', color: 'amber', description: 'We continuously improve our approaches based on the latest research and community feedback.' }
-  ];
+    const fetchCoreValues = async () => {
+      try {
+        const res = await fetch('/api/core-values');
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setValues(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch core values:', error);
+      }
+    };
+
+    fetchTeamMembers();
+    fetchCoreValues();
+  }, []);
 
   return (
     <div className="bg-gray-50 font-sans">
@@ -118,7 +133,7 @@ export default function CoreTeamPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {values.map((value) => (
-                <ValueCard key={value.title} icon={value.icon} title={value.title} color={value.color}>
+                <ValueCard key={value.id || value.title} icon={value.icon} title={value.title} color={value.color}>
                   {value.description}
                 </ValueCard>
               ))}

@@ -15,6 +15,8 @@ export default function AdminDashboard() {
                 <Link href="/admin/video-testimonials" className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"><h2 className="text-2xl font-semibold mb-2">Manage Videos</h2><p>Add or remove YouTube video testimonials.</p></Link>
                 <Link href="/admin/news-articles" className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"><h2 className="text-2xl font-semibold mb-2">Manage News Articles</h2><p>Add or remove links to news articles.</p></Link>
                 <Link href="/admin/annual-reports" className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"><h2 className="text-2xl font-semibold mb-2">Manage Annual Reports</h2><p>Add or remove annual report PDFs.</p></Link>
+                <Link href="/admin/core-values" className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"><h2 className="text-2xl font-semibold mb-2">Manage Core Values</h2><p>Control the value tiles shown on the Core Team page.</p></Link>
+                <Link href="/admin/donation-impacts" className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"><h2 className="text-2xl font-semibold mb-2">Manage Donation Impacts</h2><p>Control the impact tiles shown on the Donate page.</p></Link>
             </div>
         </div>
     );

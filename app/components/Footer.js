@@ -14,6 +14,8 @@ const Icon = ({ name, className }) => {
 };
 
 export default function Footer() {
+    const currentYear = new Date().getFullYear();
+
     return (
         <footer className="bg-gray-900 text-white">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -54,7 +56,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="mt-12 border-t border-gray-700 pt-8 text-center text-sm text-gray-500">
-                    <p>&copy; 2021–2025 Tejo Surya Charitable Foundation. All rights reserved.</p>
+                    <p>&copy; 2021–{currentYear} Tejo Surya Charitable Foundation. All rights reserved.</p>
                     <Link href="/donate">
                         <button className="bg-orange-600 text-white font-bold px-8 py-3 rounded-lg shadow-lg hover:bg-orange-700 transition-colors m-4">
                             Support Our Mission
