@@ -385,6 +385,11 @@ export default function SupportPage() {
                     amount: amountToDonate,
                     type: formData.donationType,
                     currency: formData.currencyCode,
+                    donor: {
+                        fullName: formData.donor.fullName,
+                        email: formData.donor.email,
+                        whatsapp: formData.donor.whatsapp,
+                    },
                 }),
             });
 

@@ -89,7 +89,7 @@ export async function POST(request) {
     }
 
     // The 'currency' is now passed from the frontend.
-    const { amount, currency, type } = await request.json();
+    const { amount, currency, type, donor } = await request.json();
 
     // Validate that currency is provided.
     if (!currency) {
@@ -120,6 +120,12 @@ export async function POST(request) {
         customer_notify: 1,
         quantity: 1,
         total_count: 12, // e.g., for 1 year
+        notes: {
+          donation_type: type,
+          donor_name: donor?.fullName || '',
+          donor_email: donor?.email || '',
+          donor_whatsapp: donor?.whatsapp || '',
+        },
       });
 
       return NextResponse.json({ subscription_id: subscription.id, amount: plan.item.amount, currency: plan.item.currency });
@@ -130,6 +136,12 @@ export async function POST(request) {
       amount: amount * 100,
       currency,
       receipt: `receipt_order_${Date.now()}`,
+      notes: {
+        donation_type: type,
+        donor_name: donor?.fullName || '',
+        donor_email: donor?.email || '',
+        donor_whatsapp: donor?.whatsapp || '',
+      },
     };
 
     const order = await razorpay.orders.create(options);
