@@ -247,7 +247,7 @@ export default function MissionAndVisionPage() {
                             </div>
                             {/* Right Column: Mission Image */}
                             <div className="relative rounded-2xl overflow-hidden min-h-[450px] flex items-center justify-center shadow-2xl">
-                                <img src="https://res.cloudinary.com/dqwcr4y98/image/upload/v1781959285/Our_Mission_page_side_image_agbct1.png" alt="Community health education" className="w-full h-full object-cover" />
+                                <img src="https://res.cloudinary.com/dqwcr4y98/image/upload/v1782043569/copy_of_volunteering___students_brm1f1.jpg" alt="Community health education" className="w-full h-full object-cover" />
                             </div>
                         </div>
                     </div>
