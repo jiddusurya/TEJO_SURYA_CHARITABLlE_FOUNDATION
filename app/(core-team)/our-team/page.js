@@ -101,7 +101,7 @@ export default function CoreTeamPage() {
               <div className="inline-block p-4 bg-orange-100 rounded-full mx-3 shadow-sm">
                 <Icon name="users" className="h-10 w-10 text-orange-500" />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Our Core Team</h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Our Team</h1>
             </div>
             <p className="mt-4 max-w-3xl mx-auto text-gray-600 text-lg">
               Meet the passionate individuals driving our mission to empower girls and women through comprehensive menstrual health education and support.
