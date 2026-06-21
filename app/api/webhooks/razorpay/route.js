@@ -156,10 +156,10 @@ function buildEmailHtml(payment) {
 
               <p style="margin:0 0 10px; font-size:14px;">
                 <a
-                  href="https://tejosuryafoundation.org"
+                  href="https://www.tejosuryafoundation.com/"
                   style="color:#b45309; text-decoration:none; font-weight:600;"
                 >
-                  www.tejosuryafoundation.org
+                  www.tejosuryafoundation.com
                 </a>
               </p>
 
