@@ -23,7 +23,7 @@ const StoryModal = ({ story, onClose }) => {
                     </button>
                 </div>
                 <div className="flex-grow overflow-y-auto p-6">
-                    <img src={story.imageUrl} alt={story.title} className="w-full h-64 object-cover rounded-lg mb-4" />
+                    <img src={story.imageUrl} alt={story.title} className="w-full h-64 object-contain rounded-lg mb-4" />
                     <p className="text-gray-600 whitespace-pre-wrap">{story.content}</p>
                 </div>
             </div>

@@ -248,11 +248,6 @@ export default function MissionAndVisionPage() {
                             {/* Right Column: Mission Image */}
                             <div className="relative rounded-2xl overflow-hidden min-h-[450px] flex items-center justify-center shadow-2xl">
                                 <img src="https://res.cloudinary.com/dqwcr4y98/image/upload/v1781959285/Our_Mission_page_side_image_agbct1.png" alt="Community health education" className="w-full h-full object-cover" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                                <div className="absolute bottom-8 left-8 text-white">
-                                    <h2 className="text-3xl font-bold">Our Impact in Action</h2>
-                                    <p className="mt-2 max-w-sm">See how our mission translates into real-world change for communities.</p>
-                                </div>
                             </div>
                         </div>
                     </div>
