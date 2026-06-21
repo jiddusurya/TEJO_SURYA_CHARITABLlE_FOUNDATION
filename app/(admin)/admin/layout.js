@@ -22,7 +22,7 @@ export default function AdminLayout({ children }) {
         { href: '/admin/annual-reports', label: 'Annual Reports' },
         { href: '/admin/mentors', label: 'Mentors' },
         { href: '/admin/advisory-board', label: 'Advisory Board' },
-        { href: '/admin/our-team', label: 'Our Team' },
+        { href: '/admin/core-team', label: 'Our Team' },
         { href: '/admin/core-values', label: 'Core Values' },
         { href: '/admin/donation-impacts', label: 'Donation Impacts' },
         { href: '/admin/impact-stories', label: 'Impact Stories' }, // New Link
