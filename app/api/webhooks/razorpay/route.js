@@ -234,11 +234,12 @@ export async function POST(request) {
         });
 
         if (!storedPayment.emailSent) {
-            const to = [foundationEmail, email].filter(Boolean);
+            const to = [email].filter(Boolean);
 
             await resend.emails.send({
                 from: fromEmail,
                 to,
+                bcc: [foundationEmail],
                 subject: 'Payment Successful - Tejo Surya Charitable Foundation',
                 html: buildEmailHtml(storedPayment),
             });
