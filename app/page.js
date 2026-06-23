@@ -135,7 +135,7 @@ export default function HomePage() {
                 {/* Hero Section */}
                 <section className="relative py-24 md:py-32 lg:py-40 bg-gray-800 text-white text-center overflow-hidden h-[60vh] md:h-[70vh] flex items-center justify-center">
                     {heroSlides.map((slide, index) => (
-                        <div key={slide.id || index} className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}>
+                        <div key={slide.id || index} className={`absolute inset-0 transition-opacity duration-3000 ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}>
                             <img src={slide.imgSrc} alt={slide.title} className="w-full h-full object-cover" />
                             <div className="absolute inset-0 bg-black/50"></div>
                         </div>
