@@ -192,8 +192,7 @@ export default function HomePage() {
                                     <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">80G Certified</span>
                                     <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">12AA Certified</span>
                                     <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">CSR-1 Certified</span>
-                                    <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">FCRA Registered</span>
-                                    <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">ISO : 9001 Certified</span>
+                                    <span className="text-xs font-semibold border-transparent hover:bg-primary/80 bg-slate-200 text-slate-800 px-3 py-1 rounded-full">FCRA Under Review</span>
                                 </div>
                                 <div className="mt-8 flex flex-wrap gap-4">
                                     <Link href={"/vision-and-mission"}>

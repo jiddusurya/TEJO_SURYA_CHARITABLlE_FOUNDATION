@@ -6,7 +6,7 @@ export async function GET() {
     // Only fetch mentors that are marked as visible
     const mentors = await prisma.mentor.findMany({
       where: { isVisible: true },
-      orderBy: { createdAt: 'asc' }
+      orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }]
     });
     return NextResponse.json(mentors);
   } catch (error) {

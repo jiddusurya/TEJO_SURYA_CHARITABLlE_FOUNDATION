@@ -4,7 +4,7 @@ import prisma from '../../../../lib/prisma';
 // GET all mentors for the admin panel
 export async function GET() {
     try {
-        const mentors = await prisma.mentor.findMany({ orderBy: { createdAt: 'asc' } });
+    const mentors = await prisma.mentor.findMany({ orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }] });
         return NextResponse.json(mentors);
     } catch (error) {
         return new NextResponse("Internal Server Error", { status: 500 });
