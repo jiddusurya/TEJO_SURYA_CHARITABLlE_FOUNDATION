@@ -26,6 +26,7 @@ export default function AdminLayout({ children }) {
         { href: '/admin/core-values', label: 'Core Values' },
         { href: '/admin/donation-impacts', label: 'Donation Impacts' },
         { href: '/admin/impact-stories', label: 'Impact Stories' }, // New Link
+        { href: '/admin/partners', label: 'Partners' },
     ];
 
     return (

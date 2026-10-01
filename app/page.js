@@ -68,10 +68,37 @@ const ImpactCounter = ({ end, suffix = '+' }) => {
     return <span ref={ref}>{count}{suffix}</span>;
 };
 
+// Auto-scrolling, looping strip of partner logos
+const PartnersMarquee = ({ partners }) => {
+    // Repeat the list so a single half of the track is always wider than the screen, keeping the loop seamless
+    const minItemsPerHalf = 12;
+    const repeats = Math.max(1, Math.ceil(minItemsPerHalf / partners.length));
+    const track = Array.from({ length: repeats }, () => partners).flat();
+    const duration = track.length * 3;
+
+    return (
+        <div className="group relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+            <div
+                className="flex w-max animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none"
+                style={{ animationDuration: `${duration}s` }}
+            >
+                {[...track, ...track].map((partner, index) => (
+                    <div key={`${partner.id}-${index}`} className="px-3 py-4" aria-hidden={index >= track.length}>
+                        <div className="h-24 w-40 md:h-28 md:w-48 p-4 bg-white rounded-xl border-2 border-[#e68541] shadow-md flex items-center justify-center transition-transform hover:-translate-y-1">
+                            <img src={partner.logoUrl} alt="Partner logo" className="max-h-full max-w-full object-contain" loading="lazy" />
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
 // Main Homepage Component
 export default function HomePage() {
     const [heroSlides, setHeroSlides] = useState([]);
     const [impactStats, setImpactStats] = useState([]);
+    const [partners, setPartners] = useState([]);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [loading, setLoading] = useState(true);
     const [showOtherInitiatives, setShowOtherInitiatives] = useState(false);
@@ -80,14 +107,17 @@ export default function HomePage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [slidesRes, statsRes] = await Promise.all([
+                const [slidesRes, statsRes, partnersRes] = await Promise.all([
                     fetch('/api/hero-slides'),
-                    fetch('/api/impact-stats')
+                    fetch('/api/impact-stats'),
+                    fetch('/api/partners')
                 ]);
                 const slidesData = await slidesRes.json() || [];
                 const statsData = await statsRes.json() || [];
+                const partnersData = partnersRes.ok ? await partnersRes.json() : [];
                 setHeroSlides(slidesData);
                 setImpactStats(statsData);
+                setPartners(Array.isArray(partnersData) ? partnersData : []);
             } catch (error) {
                 console.error("Failed to fetch homepage data:", error);
             } finally {
@@ -276,6 +306,26 @@ export default function HomePage() {
                         </div>
                     </div>
                 </section>
+
+                {/* Our Esteemed Partners Section */}
+                {partners.length > 0 && (
+                    <section className="py-16 bg-white">
+                        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="text-center mb-10">
+                                <h2 className="text-3xl md:text-4xl font-bold text-[#073763]">Our Esteemed Partners</h2>
+                                <p className="mt-4 max-w-2xl mx-auto text-gray-600">
+                                    We are grateful to the organisations that walk alongside us in our mission.
+                                </p>
+                            </div>
+                            <PartnersMarquee partners={partners} />
+                            <div className="mt-10 text-center">
+                                <Link href={"/partners"}>
+                                    <button className="bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-gray-900 transition-colors">View All Partners</button>
+                                </Link>
+                            </div>
+                        </div>
+                    </section>
+                )}
             </main>
         </div>
     );
